@@ -18,23 +18,6 @@ export default function Homepage()
 
     React.useEffect(()=> {}, [fetchingProducts])
 
-    const files = [
-        'QmabwwMDTAvKNvcapqWgnRDkMqXuMSkpK5Q8oopMhT7wAU.png',
-        'QmadJd1GgsSgXn7RtrcL8FePionDyf4eQEsREcvdqh6eQe.png',
-        'QmadJMqL3WWr7SdtXzNUEvusy9o3uxedTbCuXNFHQxpsNZ.png',
-        'QmapGf8z7u7f1SQv7P9r1LhjZh9B2BmmmCUS68kBjR8Fsa.png',
-        'QmaqC65aSD9Hffp4EGMnB1JiPBeCERBVUewNFMMVKYgc2A.png',
-        'QmaZLhanFj41yfXY3Ux1JNv6ZAnzsWXfbJmo7qbJzZjh4s.png',
-        'QmbcWzteFsAvdwiaZyC1YJVNsApDaPRmqkQDyrYAvP4u48.png',
-        'QmbUzseZbeM3nU6SUTQm979q7FGCMNWEqDKSZvaNUTodDk.png',
-        'QmcaEumnTbujyzzV55DXK536Q5gVZ1S2rCooDkU9wixY5H.png',
-        'QmcgoedsGRM4tzEZnSQX3RQ2SWTggATqUKQq1gfhhkzpfs.png'
-    ]
-
-    const sellers = [
-        'Ape Industries', 'Apechella', 'GuccApe'
-    ]
-
     const carouselContents = products.products.slice(0, 10).map((current, i) => {
         return (
             <CarouselProductCard 
@@ -87,7 +70,7 @@ export default function Homepage()
                     style = {{
                         fontSize : '1.3em'
                     }}
-                >{"Recommended For You"}</div>
+                >{"Most Popular"}</div>
                 <Carousel carouselContents={carouselContents}/>
             </div>
 

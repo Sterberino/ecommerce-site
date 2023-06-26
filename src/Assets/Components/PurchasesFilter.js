@@ -22,6 +22,7 @@ export default function PurchasesFilter()
                     value={`${inputMin}`}
                     type="text"
                     pattern="[0-9]*"
+                    placeholder="Min"
                     onChange={(e)=> {
                         e.target.validity.valid ? setInputMin(e.target.value) : setInputMin(inputMin);
                     }}
@@ -32,6 +33,7 @@ export default function PurchasesFilter()
                     value={`${inputMax}`}
                     type="text"
                     pattern="[0-9]*"
+                    placeholder="Max"
                     onChange={(e)=> {
                         e.target.validity.valid ? setInputMax(e.target.value) : setInputMax(inputMax);
                     }}
