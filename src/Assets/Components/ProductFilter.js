@@ -3,6 +3,7 @@ import ProductViewPage from "./ProductViewPage";
 import "../Styles/ProductViewPageStyles.css";
 import DropDownMenu from './DropdownMenu';
 import PriceFilter from './PriceFilter';
+import PurchasesFilter from './PurchasesFilter';
 
 const CascadingDropdown = () => {
     const [selectedCountry, setSelectedCountry] = useState('');
@@ -53,7 +54,7 @@ function ProductFilter({filters, setFilters})
     return(
         <div className='product-filter'>
             <DropDownMenu dropDownText={"Price"} menu={<PriceFilter />}/>
-
+            <DropDownMenu dropDownText={"Purchases"} menu={<PurchasesFilter />}/>
         </div>
     )
 }

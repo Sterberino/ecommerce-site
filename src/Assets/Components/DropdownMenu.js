@@ -1,14 +1,16 @@
 import React from "react";
-
+import '../Styles/SelectStyles.css'
+import '../Styles/ProductViewPageStyles.css'
 
 export default function DropDownMenu({dropDownText, menu})
 {
     const [open, setOpen] = React.useState(false);
 
     return(
-        <div>
+        <div className="dropdown">
             <div
                 className="selection-box"
+                style = {{width: '100%', margin: '0'}}
                 onClick={()=>{setOpen(prev => !prev)}}  
             >
                 {dropDownText}

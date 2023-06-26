@@ -12,21 +12,17 @@ export default function PriceFilter()
             <form 
                 className="search-bar"
                 style = {{
-                    width: "80%",
-                    marginLeft: "0px",
-                    position: "relative",
-                    top: "0",
-                    marginTop: "1px"
+                    marginTop: "1px",
+                    width: `${100 / 0.85}%`
                 }}
             
             >
                 <input 
-                    style ={{width: '40%'}}
+                    style ={{width: '100%', left: '0', margin: '0', marginRight: "10px"}}
                     value={`$${inputMin}`}
                     type="text"
                     onChange={(e)=> {
                         let filtered = e.target.value.replace(/[^0-9.]/gi, "");
-
                         let hasDecimal = false;
                         if(filtered.at(filtered.length - 1) === ".")
                         {
@@ -48,12 +44,29 @@ export default function PriceFilter()
                 ></input>
 
                 <input 
-                    style ={{width: '40%'}}
-                    value={inputMax}
+                    style ={{width: '100%', left: '0', margin: '0'}}
+                    value={`$${inputMax}`}
                     type="text"
                     pattern="[0-9]*"
                     onChange={(e)=> {
-                        e.target.validity.valid ? setInputMax(e.target.value) : setInputMax(inputMax);
+                        let filtered = e.target.value.replace(/[^0-9.]/gi, "");
+                        let hasDecimal = false;
+                        if(filtered.at(filtered.length - 1) === ".")
+                        {
+                            for(let i = 0; i < filtered.length -1; i++)
+                            {
+                                if(filtered[i] === ".")
+                                {
+                                    hasDecimal = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(!hasDecimal)
+                        {
+                            setInputMax(filtered);
+                        }
                     }}
                 ></input>
             </form>
