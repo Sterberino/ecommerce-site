@@ -13,14 +13,15 @@ const queries = [
     `CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`,
     `CREATE TABLE IF NOT EXISTS "products" (
 	    productId uuid DEFAULT uuid_generate_v4 (),
-	    productName VARCHAR(100) NOT NULL, 
+	    productName boolean DEFAULT False, 
         productSeller VARCHAR(100) NOT NULL,
         productImageUrl VARCHAR(100) NOT NULL, 
-        productPrice VARCHAR(100) NOT NULL, 
-        productQuantityAvailable VARCHAR(100) NOT NULL, 
+        productPrice integer DEFAULT 1, 
+        productQuantityAvailable integer DEFAULT 1, 
         productDescription VARCHAR(500) NOT NULL, 
-        productIsOnSale VARCHAR(100) NOT NULL, 
-        productSalePrice VARCHAR(100) NOT NULL,
+        productIsOnSale boolean DEFAULT False, 
+        productSalePrice integer DEFAULT 1,
+        numPurchases integer DEFAULT floor(random() * 25) + 1,
 	    PRIMARY KEY (productId)
     );`,
     `CREATE TABLE IF NOT EXISTS "users" (

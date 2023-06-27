@@ -9,15 +9,59 @@ const pool = new Pool({
     port: process.env.PG_PORT
 })
 
-
+//TODO: Add Query options
 const GetProducts = async (req, res) => {
-    pool.query('SELECT * FROM products ORDER BY productId ASC', (err, results) => {
+    const {
+        minPrice, 
+        maxPrice,
+        minPurchases,
+        maxPurchases,
+        sort,//What are we sorting by (price, purchases, name)
+        sortMode,//ASC or DESC
+        onSale
+    } = req.query;
+
+
+    let priceQuery = 'true';
+    if(minPrice && maxPrice)
+    {
+        priceQuery = `((productisonsale = false AND productprice BETWEEN ${minPrice} AND ${maxPrice}) OR ((productisonsale = true AND productsaleprice BETWEEN ${minPrice} AND ${maxPrice})))`
+    }
+    else if(minPrice && !maxPrice)
+    {
+        priceQuery = `((productisonsale = false AND productprice > ${minPrice}) OR ((productisonsale = true AND productsaleprice > ${minPrice}))`
+    }
+    else if(!minPrice && maxPrice)
+    {
+        priceQuery = `((productisonsale = false AND productprice < ${maxPrice}) OR (productisonsale = true AND productsaleprice < ${maxPrice}))`
+    }
+
+    //Filtering number of purchases
+    let purchasesQuery = 'true';
+    if(minPurchases && maxPurchases)
+    {
+        purchasesQuery = `numpurchases BETWEEN ${minPurchases} AND ${maxPurchases}`
+    }
+    else if(minPurchases && !maxPurchases)
+    {
+        purchasesQuery = `numpurchases > ${minPurchases}`
+    }
+    else if(!minPurchases && maxPurchases)
+    {
+        purchasesQuery = `numpurchases < ${maxPurchases}`
+    }
+
+    let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
+
+
+    pool.query(
+        `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY productId ASC`, (err, results) => {
         if(err)
         {
             console.log(err);
             throw err;
         }
-        res.status(200).json({payload: results.rows})
+        res.status(200).json({payload: results.rows, entries: results.rowCount})
     })
 }
 
