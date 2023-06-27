@@ -18,10 +18,12 @@ const GetProducts = async (req, res) => {
         maxPurchases,
         sort,//What are we sorting by (price, purchases, name)
         sortMode,//ASC or DESC
-        onSale
+        onSale,
+        offset,
+        limit//Number of entries per page
     } = req.query;
 
-
+    //Get the price condition. If no query, default to true
     let priceQuery = 'true';
     if(minPrice && maxPrice)
     {
@@ -36,7 +38,7 @@ const GetProducts = async (req, res) => {
         priceQuery = `((productisonsale = false AND productprice < ${maxPrice}) OR (productisonsale = true AND productsaleprice < ${maxPrice}))`
     }
 
-    //Filtering number of purchases
+    //Get the number of purchases condition. If no query, default to true
     let purchasesQuery = 'true';
     if(minPurchases && maxPurchases)
     {
@@ -50,19 +52,23 @@ const GetProducts = async (req, res) => {
     {
         purchasesQuery = `numpurchases < ${maxPurchases}`
     }
-
+    
+    //is the product on sale?
     let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
 
-
-    pool.query(
-        `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY productId ASC`, (err, results) => {
-        if(err)
-        {
-            console.log(err);
-            throw err;
-        }
-        res.status(200).json({payload: results.rows, entries: results.rowCount})
-    })
+    //perform the query with all of the relevant search conditions.
+    try{
+        const results = await pool.query(
+            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY productId ASC`);
+            res.status(200).json({payload: results.rows, entries: results.rowCount})
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.status(500).send('something went wrong');
+    }
+    
 }
 
 const GetProductById = async (req, res)=>{
