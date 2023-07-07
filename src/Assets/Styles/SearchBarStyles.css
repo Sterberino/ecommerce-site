@@ -31,7 +31,7 @@
     caret-color: rgba(220, 220 220, 1);
     color: rgba(220,220,220, 1);
     text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(210,210,210,0.6);
+    border: 1px solid rgba(210,210,210,0.7);
   }
 
   .search-bar > img{
@@ -42,3 +42,47 @@
     height: 25px;
     cursor: pointer;
   }
+
+  .filter-form{
+    justify-self: start;
+    align-self: start;
+    left: 0;
+    margin: 0;  
+    margin-top: 1px;
+    margin-bottom: 1px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    
+    width: 80%;
+   }
+
+  .filter-form > .input-field{
+    width: 50%;
+    position: relative;
+    
+  }
+
+  .filter-form > .input-field > input[type=text]{
+    position: relative;
+    padding: 6px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid rgba(190,190,190,0.5);
+    background-color: rgba(0,0,0,0.4);
+    color: rgba(190,190,190, 1);
+    text-align: left;
+    transition: color 0.25s ease-in-out,
+                border 0.25s ease-in-out,
+                text-shadow 0.25s ease-in-out;
+}
+  
+.filter-form > .input-field > input[type=text]:focus {
+    outline: none;
+    caret-color: rgba(220, 220 220, 1);
+    color: rgba(220,220,220, 1);
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(210,210,210,0.7);
+}

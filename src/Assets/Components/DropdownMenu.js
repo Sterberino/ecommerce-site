@@ -2,7 +2,7 @@ import React from "react";
 import '../Styles/SelectStyles.css'
 import '../Styles/ProductViewPageStyles.css'
 
-export default function DropDownMenu({dropDownText, menu})
+export default function DropDownMenu({dropDownText, onChangeState})
 {
     const [open, setOpen] = React.useState(false);
 
@@ -11,7 +11,13 @@ export default function DropDownMenu({dropDownText, menu})
             <div
                 className="selection-box"
                 style = {{width: '100%', margin: '0'}}
-                onClick={()=>{setOpen(prev => !prev)}}  
+                onClick={
+                    ()=>{
+                        setOpen(prev => {
+                            onChangeState(!prev)
+                            return !prev;
+                        })
+                }}  
             >
                 {dropDownText}
                 <img 
@@ -19,7 +25,6 @@ export default function DropDownMenu({dropDownText, menu})
                     className= {`selection-box-arrow${open ? ' selection-box-arrow-focused': ''}`}
                 />
             </div>
-            {open && menu}
         </div>
     )
 

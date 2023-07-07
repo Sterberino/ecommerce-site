@@ -4,59 +4,131 @@ import "../Styles/ProductViewPageStyles.css";
 import DropDownMenu from './DropdownMenu';
 import PriceFilter from './PriceFilter';
 import PurchasesFilter from './PurchasesFilter';
+import OnSaleFilter from './OnSaleFilter';
 
-const CascadingDropdown = () => {
-    const [selectedCountry, setSelectedCountry] = useState('');
-    const [selectedCity, setSelectedCity] = useState('');
-    const [cities, setCities] = useState([]);
 
-    const countries = ['USA', 'Canada'];
-    const cityData = {
-        USA: ['New York', 'Los Angeles', 'Chicago'],
-        Canada: ['Toronto', 'Vancouver', 'Montreal']
-    };
-
-    const handleCountryChange = (event) => {
-        setSelectedCountry(event.target.value);
-        setCities(cityData[event.target.value]);
-    }
-
-    const handleCityChange = (event) => {
-        setSelectedCity(event.target.value);
-    }
-
-    return (
-        <form className = "FilterDropdown">
-            <div>
-            <select value={selectedCountry} onChange={handleCountryChange}>
-                <option value="">Price</option>
-                {countries.map((country, index) => (
-                    <option key={index} value={country}>{country}</option>
-                ))}
-            </select>
-            </div>
-            
-            <div>
-            <select value={selectedCity} onChange={handleCityChange}>
-                <option value="">Brand</option>
-                {cities.map((city, index) => (
-                    <option key={index} value={city}>{city}</option>
-                ))}
-            </select>
-            </div>
-            
-        </form>
-    );
-}
-
-function ProductFilter({filters, setFilters})
+export default function ProductFilter({filters, setFilters})
 {
+    const [priceFilterOpen, setPriceFilterOpen] = React.useState(false);
+    const [purchasesFilterOpen, setPurchasesFilterOpen] = React.useState(false);
+    const [onSaleFilterOpen, setOnSaleFilterOpen] = React.useState(false);
+
+    const [QueryFields, setQueryFields] = React.useState(null);
+
+
+    const HandlePurchasesChange = (values)=>{
+        let minPurchases = values.min === "" ? null : values.min; 
+        let maxPurchases = values.max === "" ? null : values.max; 
+    
+        let query = {
+            ...QueryFields,
+        }
+        if(minPurchases !== null)
+        {
+            query.minPurchases = minPurchases;
+        }
+        else{
+            delete query.minPurchases;
+        }
+        if(maxPurchases !== null)
+        {
+            query.maxPurchases = maxPurchases;
+        }
+        else{
+            delete query.maxPurchases;
+        }
+        console.log(JSON.stringify(query))
+        setQueryFields(query);
+    }
+
+    const HandlePriceChange = (values) => {
+        let minPrice = values.min === "" ? null : values.min; 
+        let maxPrice = values.max === "" ? null : values.max; 
+
+        let query = {
+            ...QueryFields,
+        }
+        if(minPrice !== null)
+        {
+            query.minPrice = minPrice;
+        }
+        else{
+            delete query.minPrice;
+        }
+        if(maxPrice !== null)
+        {
+            query.maxPrice = maxPrice;
+        }
+        else{
+            delete query.maxPrice;
+        }
+        console.log(JSON.stringify(query))
+        setQueryFields(query);
+    }
+
+    const HandleSaleChange = (value) => {
+        let query = {
+            ...QueryFields,
+        }
+        if(value !== null)
+        {
+            query.onSale = value;
+        }
+        else{
+            delete query.onSale;
+        }
+        setQueryFields(query);
+    }
+
     return(
         <div className='product-filter'>
-            <DropDownMenu dropDownText={"Price"} menu={<PriceFilter />}/>
-            <DropDownMenu dropDownText={"Purchases"} menu={<PurchasesFilter />}/>
+            <DropDownMenu 
+                dropDownText={"Price"} 
+                onChangeState={(val)=>{
+                    setPriceFilterOpen(val)
+                    if(val === false)
+                    {
+                        HandlePriceChange({max: "", min: ""})
+                    }
+                }}/>
+            {priceFilterOpen && 
+            <PriceFilter 
+                onValuesChange={(values) => {
+                   HandlePriceChange(values);
+                }
+            }
+            />}
+            <DropDownMenu 
+                dropDownText={"Purchases"}  
+                onChangeState={(val)=>{
+                    setPurchasesFilterOpen(val)
+                    if(val === false)
+                    {
+                        HandlePriceChange({max: "", min: ""})
+                    }
+                }}/>
+            {purchasesFilterOpen && 
+            <PurchasesFilter 
+                onValuesChange={(values) => {
+                    HandlePurchasesChange(values);
+                }}
+            />}
+            <DropDownMenu 
+                dropDownText={"On Sale"}  
+                onChangeState={(val)=>{
+                    setOnSaleFilterOpen(val)
+                    if(val === false)
+                    {
+                        HandleSaleChange(null)
+                    }
+                }}
+            />
+            {onSaleFilterOpen && 
+            <OnSaleFilter 
+                onValueChanged={(val)=> {
+                    HandleSaleChange(val)
+                }}/>
+            }
         </div>
     )
 }
-
-export default ProductFilter;

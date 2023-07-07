@@ -24,35 +24,9 @@ const GetProducts = async (req, res) => {
     } = req.query;
 
     //Get the price condition. If no query, default to true
-    let priceQuery = 'true';
-    if(minPrice && maxPrice)
-    {
-        priceQuery = `((productisonsale = false AND productprice BETWEEN ${minPrice} AND ${maxPrice}) OR ((productisonsale = true AND productsaleprice BETWEEN ${minPrice} AND ${maxPrice})))`
-    }
-    else if(minPrice && !maxPrice)
-    {
-        priceQuery = `((productisonsale = false AND productprice > ${minPrice}) OR ((productisonsale = true AND productsaleprice > ${minPrice}))`
-    }
-    else if(!minPrice && maxPrice)
-    {
-        priceQuery = `((productisonsale = false AND productprice < ${maxPrice}) OR (productisonsale = true AND productsaleprice < ${maxPrice}))`
-    }
-
+    let priceQuery = getPriceQuery(minPrice, maxPrice);
     //Get the number of purchases condition. If no query, default to true
-    let purchasesQuery = 'true';
-    if(minPurchases && maxPurchases)
-    {
-        purchasesQuery = `numpurchases BETWEEN ${minPurchases} AND ${maxPurchases}`
-    }
-    else if(minPurchases && !maxPurchases)
-    {
-        purchasesQuery = `numpurchases > ${minPurchases}`
-    }
-    else if(!minPurchases && maxPurchases)
-    {
-        purchasesQuery = `numpurchases < ${maxPurchases}`
-    }
-    
+    let purchasesQuery = getPurchasesQuery(minPurchases, maxPurchases);
     //is the product on sale?
     let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
 
@@ -68,7 +42,41 @@ const GetProducts = async (req, res) => {
         console.log(err);
         res.status(500).send('something went wrong');
     }
-    
+}
+
+const getPriceQuery = (minPrice, maxPrice) => {
+    let priceQuery = 'true';
+    if(minPrice && maxPrice)
+    {
+        priceQuery = `((productisonsale = false AND productprice BETWEEN ${minPrice} AND ${maxPrice}) OR ((productisonsale = true AND productsaleprice BETWEEN ${minPrice} AND ${maxPrice})))`
+    }
+    else if(minPrice && !maxPrice)
+    {
+        priceQuery = `((productisonsale = false AND productprice > ${minPrice}) OR ((productisonsale = true AND productsaleprice > ${minPrice}))`
+    }
+    else if(!minPrice && maxPrice)
+    {
+        priceQuery = `((productisonsale = false AND productprice < ${maxPrice}) OR (productisonsale = true AND productsaleprice < ${maxPrice}))`
+    }
+
+    return priceQuery;
+}
+
+const getPurchasesQuery = (minPurchases, maxPurchases) => {
+    let purchasesQuery = 'true';
+    if(minPurchases && maxPurchases)
+    {
+        purchasesQuery = `numpurchases BETWEEN ${minPurchases} AND ${maxPurchases}`
+    }
+    else if(minPurchases && !maxPurchases)
+    {
+        purchasesQuery = `numpurchases > ${minPurchases}`
+    }
+    else if(!minPurchases && maxPurchases)
+    {
+        purchasesQuery = `numpurchases < ${maxPurchases}`
+    }
+    return purchasesQuery;
 }
 
 const GetProductById = async (req, res)=>{

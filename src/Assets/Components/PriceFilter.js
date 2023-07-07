@@ -1,8 +1,7 @@
 import React from "react";
 import '../Styles/SearchBarStyles.css'
-import { clear } from "@testing-library/user-event/dist/clear";
 
-export default function PriceFilter()
+export default function PriceFilter({onValuesChange})
 {
     const [inputMin, setInputMin] = React.useState("");
     const [inputMax, setInputMax] = React.useState("");
@@ -10,15 +9,13 @@ export default function PriceFilter()
     const Inputs = ()=> {
         return (
             <form 
-                className="search-bar"
-                style = {{
-                    marginTop: "1px",
-                    width: `${100 / 0.85}%`
-                }}
-            
+                className="filter-form"
             >
+                <div 
+                    className="input-field"
+                    style ={{marginRight: "10px"}}
+                >
                 <input 
-                    style ={{width: '100%', left: '0', margin: '0', marginRight: "10px"}}
                     value={`$${inputMin}`}
                     type="text"
                     onChange={(e)=> {
@@ -39,12 +36,21 @@ export default function PriceFilter()
                         if(!hasDecimal)
                         {
                             setInputMin(filtered);
+                            if(onValuesChange !== null && onValuesChange !== undefined)
+                            {
+                                onValuesChange({min: filtered, max: inputMax})
+                            }
                         }
                     }}
                 ></input>
 
+                </div>
+                
+                <div  
+                    className="input-field"
+                    style ={{marginLeft: '10px'}}
+                >
                 <input 
-                    style ={{width: '100%', left: '0', margin: '0'}}
                     value={`$${inputMax}`}
                     type="text"
                     pattern="[0-9]*"
@@ -66,9 +72,15 @@ export default function PriceFilter()
                         if(!hasDecimal)
                         {
                             setInputMax(filtered);
+                            if(onValuesChange !== null  && onValuesChange !== undefined)
+                            {
+                                onValuesChange({min: inputMin, max: filtered})
+                            }
                         }
                     }}
                 ></input>
+                </div>
+                
             </form>
         )
     }
@@ -76,8 +88,6 @@ export default function PriceFilter()
 
 
     return(
-        <div>
-            {Inputs()}
-        </div>
+        Inputs()
     )
 }
