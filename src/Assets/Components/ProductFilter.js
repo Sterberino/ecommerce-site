@@ -90,7 +90,8 @@ export default function ProductFilter({filters, setFilters})
                     {
                         HandlePriceChange({max: "", min: ""})
                     }
-                }}/>
+                }}
+            />
             {priceFilterOpen && 
             <PriceFilter 
                 onValuesChange={(values) => {
@@ -106,7 +107,8 @@ export default function ProductFilter({filters, setFilters})
                     {
                         HandlePriceChange({max: "", min: ""})
                     }
-                }}/>
+                }}
+            />
             {purchasesFilterOpen && 
             <PurchasesFilter 
                 onValuesChange={(values) => {
@@ -127,7 +129,8 @@ export default function ProductFilter({filters, setFilters})
             <OnSaleFilter 
                 onValueChanged={(val)=> {
                     HandleSaleChange(val)
-                }}/>
+                }}
+            />
             }
         </div>
     )

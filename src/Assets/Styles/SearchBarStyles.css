@@ -43,26 +43,43 @@
     cursor: pointer;
   }
 
+.filter-form-wrapper{  
+  position: relative;
+  justify-self: flex-start;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  left: 5%;
+  right: auto;
+  min-width: 80%;
+  max-width: 80%;
+}
+
   .filter-form{
     justify-self: start;
-    align-self: start;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
     left: 0;
     margin: 0;  
     margin-top: 1px;
     margin-bottom: 1px;
     position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    
-    width: 80%;
+
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
    }
 
   .filter-form > .input-field{
-    width: 50%;
+    width: 100%;
     position: relative;
-    
   }
 
   .filter-form > .input-field > input[type=text]{

@@ -127,7 +127,11 @@
         right: 20px;
     }
 
- 
+    .navigation-menu{
+        width: 90%;
+        left: 5%;
+        right: auto;
+    }
     .navigation-menu-item {
         margin-left: 10px;
         margin-right: 10px;

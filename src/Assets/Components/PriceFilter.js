@@ -8,12 +8,13 @@ export default function PriceFilter({onValuesChange})
 
     const Inputs = ()=> {
         return (
+            <div className="filter-form-wrapper">
             <form 
                 className="filter-form"
             >
                 <div 
                     className="input-field"
-                    style ={{marginRight: "10px"}}
+                    style ={{paddingRight: "10px"}}
                 >
                 <input 
                     value={`$${inputMin}`}
@@ -48,7 +49,7 @@ export default function PriceFilter({onValuesChange})
                 
                 <div  
                     className="input-field"
-                    style ={{marginLeft: '10px'}}
+                    style ={{paddingLeft: '10px'}}
                 >
                 <input 
                     value={`$${inputMax}`}
@@ -82,6 +83,7 @@ export default function PriceFilter({onValuesChange})
                 </div>
                 
             </form>
+            </div>
         )
     }
 
