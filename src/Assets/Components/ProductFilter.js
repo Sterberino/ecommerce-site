@@ -5,10 +5,14 @@ import DropDownMenu from './DropdownMenu';
 import PriceFilter from './PriceFilter';
 import PurchasesFilter from './PurchasesFilter';
 import OnSaleFilter from './OnSaleFilter';
-
-
+import { filterContext } from './ProductViewPage';
+import useWindowSize from '../Hooks/useWindowSize';
+import FilterCloseButton from './FilterCloseButton';
 export default function ProductFilter({filters, setFilters})
 {
+    const {filterOpen, setFilterOpen} = React.useContext(filterContext);
+    const [windowWidth, windowHeight] = useWindowSize();
+
     const [priceFilterOpen, setPriceFilterOpen] = React.useState(false);
     const [purchasesFilterOpen, setPurchasesFilterOpen] = React.useState(false);
     const [onSaleFilterOpen, setOnSaleFilterOpen] = React.useState(false);
@@ -82,6 +86,8 @@ export default function ProductFilter({filters, setFilters})
 
     return(
         <div className='product-filter'>
+            {windowWidth <= 640 && <FilterCloseButton />}
+
             <DropDownMenu 
                 dropDownText={"Price"} 
                 onChangeState={(val)=>{
