@@ -6,10 +6,59 @@ import Select from "./Select";
 import useWindowSize from "../Hooks/useWindowSize";
 import FilterButton from "./FilterButton";
 
+import { queryContext } from "./ProductViewPage";
+
 export default function ProductFilterHeader({})
 {
     const [windowWidth, windowHeight] = useWindowSize();
-    
+    const {queryValues, setQueryValues} = React.useContext(queryContext);
+
+    const HandleSelectionChange = (val)=>{
+        console.log(val);
+        let sort = null;
+        let sortMode = null;
+
+        //We map the incoming text to an appropriate postgres query parameter
+        switch(val)
+        {
+            case  'A-Z':
+                sort = 'productname';
+                sortMode = 'ASC';
+                break;
+            case 'Price (High-Low)':
+                sort = 'productprice';
+                sortMode = 'DESC';      
+                break;
+            case 'Price (Low-High)':
+                sort = 'productprice';
+                sortMode = 'DESC';  
+                break;
+            case 'Latest':
+                sort = 'createdat';
+                sortMode = 'DESC';
+                break;
+            case 'Most Popular':
+                sort = 'numpurchases';
+                sortMode = 'DESC';  
+                break;
+            //Something went wrong, don't apply changes
+            default:
+                break;
+        }
+
+        if(sort !== null)
+        {
+            let query = {
+                ...queryValues
+            }
+
+            query.appliedQuery.sort = sort;
+            query.appliedQuery.sortMode = sortMode;
+
+            setQueryValues(query);
+        }
+    }
+
     return(
         <div className="product-filter-header">
             
@@ -25,6 +74,7 @@ export default function ProductFilterHeader({})
                     'Latest',
                     'Most Popular'
                 ]}
+                onChangeSelection={(val)=> {HandleSelectionChange(val)}}
             />
         </div>
     )

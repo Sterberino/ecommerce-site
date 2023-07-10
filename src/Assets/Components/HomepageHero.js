@@ -18,7 +18,10 @@ export default function HomepageHero({imageUrl, title})
 
                 <div 
                     className="title-text"
-                    onClick={()=> {navigate('/shop')}}
+                    onClick={()=> {
+                        navigate('/shop')
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                    }}
                 >{"SHOP NOW"}</div>
             </div>
             <div className="footer-divider-bar"></div>

@@ -14,7 +14,20 @@ const addColumn = async()=>{
     try{
         const results = await pool.query(
             `ALTER TABLE "products"
-                ADD COLUMN numPurchases integer DEFAULT floor(random() * 25) + 1;`
+                ADD COLUMN createdAt DATE DEFAULT NOW() - '1 week'::INTERVAL * ROUND(RANDOM() * 100);`
+        )   
+    }
+    catch(err){
+        console.log(err)
+        throw err;
+    }
+}
+
+const dropColumn = async()=> {
+    try{
+        const results = await pool.query(
+            `ALTER TABLE "products"
+                DROP COLUMN IF EXISTS createdAt;`
         )   
     }
     catch(err){
@@ -37,4 +50,4 @@ const alterColumn = async()=>{
     }
 }
 
-alterColumn()
+//addColumn()

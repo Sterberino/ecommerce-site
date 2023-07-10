@@ -16,16 +16,21 @@ import useWindowSize from "../Hooks/useWindowSize.js";
 
 //For sub elements controlling if the filter should be open or not. (when mobile view)
 export const filterContext = React.createContext();
+
+//Query Context, the query values for item filtering
+export const queryContext = React.createContext();
+
+
 export default function ProductViewPage() {
   const{products, setProducts} = React.useContext(ProductsContext);
   const[fetchingProducts, setFetchingProducts] = useGetProducts();
   const productCards = useGetCards();
   
   const [windowWidth, windowHeight] = useWindowSize();
-  const[lastWindowWidth, setLastWindowWidth] = React.useState(window.innerWidth);
+  const[lastWindowWidth, setLastWindowWidth] = React.useState(windowWidth);
   
-  const[filterOpen, setFilterOpen] = React.useState(false);
-  
+  const[filterOpen, setFilterOpen] = React.useState(windowWidth > 640 ? true : false);
+  const [queryValues, setQueryValues] = React.useState({appliedQuery: {}, unappliedQuery: {}});
   
   React.useEffect(()=>{}, [fetchingProducts])
   React.useEffect(()=>{
@@ -38,15 +43,15 @@ export default function ProductViewPage() {
     {
       setFilterOpen(false);
     }
+    else if(windowWidth > 640 && !filterOpen)
+    {
+      setFilterOpen(true);
+    }
     setLastWindowWidth(windowWidth);
   }, [windowWidth])
 
- 
+ console.log(JSON.stringify( queryValues))
     
- 
-
-  window.scrollTo({top: 0, left: 0, behavior: "instant"})
-
   if(fetchingProducts)
   {
     return(
@@ -62,6 +67,7 @@ export default function ProductViewPage() {
   }
 
   return (
+    <queryContext.Provider value = {{queryValues: queryValues, setQueryValues: setQueryValues}}>
     <filterContext.Provider value={{filterOpen: filterOpen, setFilterOpen : setFilterOpen}}>
       <div>
       <SiteHeader />
@@ -74,6 +80,7 @@ export default function ProductViewPage() {
         <SiteFooter />
       </div>
       </filterContext.Provider>
+      </queryContext.Provider>
     );
   }
   

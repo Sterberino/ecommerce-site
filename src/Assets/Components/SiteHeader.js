@@ -46,7 +46,10 @@ export default function SiteHeader({})
                 <div className="navigation-menu-item">
                     <div 
                         className="title-text"
-                        onClick = {()=> {navigate('/shop')}}
+                        onClick = {()=> {
+                            navigate('/shop')
+                            window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        }}
                     >{"Shop"}</div>
                 </div>
                 {/* <div className="navigation-menu-item">

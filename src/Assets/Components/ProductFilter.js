@@ -8,6 +8,10 @@ import OnSaleFilter from './OnSaleFilter';
 import { filterContext } from './ProductViewPage';
 import useWindowSize from '../Hooks/useWindowSize';
 import FilterCloseButton from './FilterCloseButton';
+
+import { queryContext } from './ProductViewPage';
+import ApplyFilterButton from './ApplyFilterButton';
+
 export default function ProductFilter({filters, setFilters})
 {
     const {filterOpen, setFilterOpen} = React.useContext(filterContext);
@@ -17,32 +21,31 @@ export default function ProductFilter({filters, setFilters})
     const [purchasesFilterOpen, setPurchasesFilterOpen] = React.useState(false);
     const [onSaleFilterOpen, setOnSaleFilterOpen] = React.useState(false);
 
-    const [QueryFields, setQueryFields] = React.useState(null);
-
+    const {queryValues, setQueryValues} = React.useContext(queryContext);
 
     const HandlePurchasesChange = (values)=>{
         let minPurchases = values.min === "" ? null : values.min; 
         let maxPurchases = values.max === "" ? null : values.max; 
     
         let query = {
-            ...QueryFields,
+            ...queryValues,
         }
         if(minPurchases !== null)
         {
-            query.minPurchases = minPurchases;
+            query.unappliedQuery.minPurchases = minPurchases;
         }
         else{
-            delete query.minPurchases;
+            delete query.unappliedQuery.minPurchases;
         }
         if(maxPurchases !== null)
         {
-            query.maxPurchases = maxPurchases;
+            query.unappliedQuery.maxPurchases = maxPurchases;
         }
         else{
-            delete query.maxPurchases;
+            delete query.unappliedQuery.maxPurchases;
         }
         console.log(JSON.stringify(query))
-        setQueryFields(query);
+        setQueryValues(query);
     }
 
     const HandlePriceChange = (values) => {
@@ -50,38 +53,40 @@ export default function ProductFilter({filters, setFilters})
         let maxPrice = values.max === "" ? null : values.max; 
 
         let query = {
-            ...QueryFields,
+            ...queryValues,
         }
+
         if(minPrice !== null)
         {
-            query.minPrice = minPrice;
+            query.unappliedQuery.minPrice = minPrice;
         }
         else{
-            delete query.minPrice;
+            delete query.unappliedQuery.minPrice;
         }
+
         if(maxPrice !== null)
         {
-            query.maxPrice = maxPrice;
+            query.unappliedQuery.maxPrice = maxPrice;
         }
         else{
-            delete query.maxPrice;
+            delete query.unappliedQuery.maxPrice;
         }
         console.log(JSON.stringify(query))
-        setQueryFields(query);
+        setQueryValues(query);
     }
 
     const HandleSaleChange = (value) => {
         let query = {
-            ...QueryFields,
+            ...queryValues,
         }
         if(value !== null)
         {
-            query.onSale = value;
+            query.unappliedQuery.onSale = value;
         }
         else{
-            delete query.onSale;
+            delete query.unappliedQuery.onSale;
         }
-        setQueryFields(query);
+        setQueryValues(query);
     }
 
     return(
@@ -138,6 +143,7 @@ export default function ProductFilter({filters, setFilters})
                 }}
             />
             }
+            <ApplyFilterButton />
         </div>
     )
 }
