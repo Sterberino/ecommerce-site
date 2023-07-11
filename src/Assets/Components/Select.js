@@ -6,7 +6,7 @@ import '../Styles/SelectStyles.css'
 export default function Select({options, initialText, style, onChangeSelection})
 {
     const [focused, setFocused] = React.useState(false)
-    const [currentSelection, setCurrentSelection] = React.useState(initialText ? initialText : "Sort By")
+    const [currentSelection, setCurrentSelection] = React.useState(initialText !== null && initialText !== undefined ? initialText : "Sort By")
     
     const optionsDivs = options.map((current, index) => {
         return (

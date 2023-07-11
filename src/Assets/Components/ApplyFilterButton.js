@@ -19,7 +19,7 @@ export default function ApplyFilterButton()
             ...queryValues
         };
         query.appliedQuery = query.unappliedQuery;
-        query.unappliedQuery = {};
+        //query.unappliedQuery = {};
         query.requiresRefresh = true;
         
         setQueryValues(query);

@@ -59,11 +59,38 @@ export default function ProductFilterHeader({})
         }
     }
 
+    const EvaluateInitialText = ()=>{
+        if(queryValues.appliedQuery.sort && queryValues.appliedQuery.sortMode)
+        {
+            switch(queryValues.appliedQuery.sort)
+            {
+                case 'productprice':
+                    if(queryValues.appliedQuery.sortMode === 'ASC')
+                    {
+                        return 'Price (Low-High)';
+                    }
+                    else{
+                        return 'Price (High-Low)';
+                    }
+                case 'productname':
+                    return 'productname'
+                case 'createdat':
+                    return 'Latest';
+                case 'numpurchases':
+                    return 'Most Popular';
+                default:
+                    return null;
+            }
+        }
+        return null;
+    }
+
     return(
         <div className="product-filter-header">
             
             {windowWidth > 640 ? <div className="title-text">{'Filter By:'}</div> : <FilterButton/>}
             <Select 
+                initialText={EvaluateInitialText()}
                 style = {{
                     width: '160px'
                 }}

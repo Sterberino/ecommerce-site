@@ -30,7 +30,7 @@ const GetProducts = async (req, res) => {
     //is the product on sale?
     let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
 
-    let orderByQuery = 'productId';
+    let orderByQuery = sort ? sort : 'productId';
     let orderModeQuery = sortMode ? sortMode : 'ASC';
 
     let limitQuery = limit ? ` LIMIT ${limit}` : '';

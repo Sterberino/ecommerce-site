@@ -108,7 +108,14 @@ const AssignFilterState = ()=>{
       <ProductFilterHeader/>
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}
-          <ProductGrid products={productCards}/>
+          {productCards.length > 0 ? 
+            <ProductGrid products={productCards}/> : 
+            <div style = {{
+              alignSelf: 'center',
+              justifySelf: 'start',
+              width: '100%', 
+              marginBottom: "100px"
+            }} className="title-text">{"No Results"}</div>}
         </div>
         <SiteFooter />
       </div>
