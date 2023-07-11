@@ -9,6 +9,7 @@ import OurStory from "./OurStory";
 import useGetProducts from "../Hooks/useGetProducts";
 import { ProductsContext } from "../../App";
 import Spinner from "./Spinner";
+import BlackMirrorSpinner from "./BlackMirrorSpinner";
 export default function Homepage()
 {
     const[fetchingProducts, setFetchingProducts] = useGetProducts();
@@ -32,7 +33,7 @@ export default function Homepage()
         return(
             <div>
                 <SiteHeader />
-                <Spinner style = {{
+                <BlackMirrorSpinner style = {{
                     width: '100%',
                     justifyContent: 'center'
                 }}/>

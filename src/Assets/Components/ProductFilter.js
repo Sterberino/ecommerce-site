@@ -47,7 +47,6 @@ export default function ProductFilter({filters, setFilters})
         console.log(JSON.stringify(query))
         setQueryValues(query);
     }
-
     const HandlePriceChange = (values) => {
         let minPrice = values.min === "" ? null : values.min; 
         let maxPrice = values.max === "" ? null : values.max; 
@@ -105,6 +104,8 @@ export default function ProductFilter({filters, setFilters})
             />
             {priceFilterOpen && 
             <PriceFilter 
+                initialMin={queryValues.appliedQuery.minPrice ? queryValues.appliedQuery.minPrice : null}
+                initialMax={queryValues.appliedQuery.maxPrice ? queryValues.appliedQuery.maxPrice : null}
                 onValuesChange={(values) => {
                    HandlePriceChange(values);
                 }
@@ -122,6 +123,8 @@ export default function ProductFilter({filters, setFilters})
             />
             {purchasesFilterOpen && 
             <PurchasesFilter 
+                initialMin={queryValues.appliedQuery.minPurchases ? queryValues.appliedQuery.minPurchases : null}
+                initialMax={queryValues.appliedQuery.maxPurchases ? queryValues.appliedQuery.maxPurchases : null}
                 onValuesChange={(values) => {
                     HandlePurchasesChange(values);
                 }}
@@ -138,6 +141,7 @@ export default function ProductFilter({filters, setFilters})
             />
             {onSaleFilterOpen && 
             <OnSaleFilter 
+                initialVal={queryValues.appliedQuery.onSale ? queryValues.appliedQuery.onSale : null}
                 onValueChanged={(val)=> {
                     HandleSaleChange(val)
                 }}

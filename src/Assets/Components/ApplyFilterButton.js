@@ -15,6 +15,7 @@ export default function ApplyFilterButton()
         };
         query.appliedQuery = query.unappliedQuery;
         query.unappliedQuery = {};
+        query.requiresRefresh = true;
         
         setQueryValues(query);
         setFilterOpen(false);

@@ -61,7 +61,7 @@ export default function ProductDisplayCard({product})
             marginTop: '10px',
             marginBottom: 'auto'
           }}
-        >{`$${product.productprice}`}</div>
+        >{`$${product.productisonsale ? product.productsaleprice : product.productprice}`}</div>
         <NeoMorphicIcon 
           iconFilepath={`Images/shopping-cart` } 
           style = {{

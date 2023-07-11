@@ -1,10 +1,10 @@
 import React from "react";
 import '../Styles/SearchBarStyles.css'
 
-export default function PriceFilter({onValuesChange})
+export default function PriceFilter({onValuesChange, initialMin, initialMax})
 {
-    const [inputMin, setInputMin] = React.useState("");
-    const [inputMax, setInputMax] = React.useState("");
+    const [inputMin, setInputMin] = React.useState(initialMin !== undefined && initialMin !== null  ? initialMin : "");
+    const [inputMax, setInputMax] = React.useState(initialMax !== undefined && initialMax !== null  ? initialMax : "");
 
     const Inputs = ()=> {
         return (

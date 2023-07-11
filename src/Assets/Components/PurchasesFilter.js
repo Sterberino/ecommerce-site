@@ -2,11 +2,10 @@ import React from "react";
 import '../Styles/SearchBarStyles.css'
 import { clear } from "@testing-library/user-event/dist/clear";
 
-export default function PurchasesFilter({onValuesChange})
+export default function PurchasesFilter({onValuesChange, initialMin, initialMax})
 {
-    const [inputMin, setInputMin] = React.useState("");
-    const [inputMax, setInputMax] = React.useState("");
-
+    const [inputMin, setInputMin] = React.useState(initialMin !== undefined && initialMin !== null  ? initialMin : "");
+    const [inputMax, setInputMax] = React.useState(initialMax !== undefined && initialMax !== null  ? initialMax : "");
 
     return(
         <div className="filter-form-wrapper">

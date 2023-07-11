@@ -46,18 +46,23 @@ const GetProducts = async (req, res) => {
 
 const getPriceQuery = (minPrice, maxPrice) => {
     let priceQuery = 'true';
-    if(minPrice && maxPrice)
+
+    console.log(`Min Price: ${minPrice}, Max Price: ${maxPrice}`)
+
+    if(minPrice !== undefined && maxPrice !== undefined)
     {
         priceQuery = `((productisonsale = false AND productprice BETWEEN ${minPrice} AND ${maxPrice}) OR ((productisonsale = true AND productsaleprice BETWEEN ${minPrice} AND ${maxPrice})))`
     }
-    else if(minPrice && !maxPrice)
+    else if(minPrice !== undefined && maxPrice === undefined)
     {
         priceQuery = `((productisonsale = false AND productprice > ${minPrice}) OR ((productisonsale = true AND productsaleprice > ${minPrice}))`
     }
-    else if(!minPrice && maxPrice)
+    else if(minPrice === undefined && maxPrice !== undefined)
     {
         priceQuery = `((productisonsale = false AND productprice < ${maxPrice}) OR (productisonsale = true AND productsaleprice < ${maxPrice}))`
     }
+
+    console.log(priceQuery);
 
     return priceQuery;
 }

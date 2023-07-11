@@ -2,9 +2,9 @@ import React from "react";
 import '../Styles/Checkbox.css'
 import '../Styles/textStyles.css'
 
-export default function({onValueChanged})
+export default function({onValueChanged, initialVal})
 {
-    const [onSale, setOnSale] = React.useState(false)
+    const [onSale, setOnSale] = React.useState(initialVal !== undefined && initialVal !== null ? initialVal : false)
 
     return(
         <div className="filter-form-wrapper">
