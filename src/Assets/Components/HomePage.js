@@ -10,6 +10,7 @@ import useGetProducts from "../Hooks/useGetProducts";
 import { ProductsContext } from "../../App";
 import Spinner from "./Spinner";
 import BlackMirrorSpinner from "./BlackMirrorSpinner";
+import HomepageCarouselWrapper from "./HomepageCarouselWrapper";
 export default function Homepage()
 {
     const[fetchingProducts, setFetchingProducts] = useGetProducts();
@@ -57,7 +58,7 @@ export default function Homepage()
                         fontSize : '1.3em'
                     }}
                 >{"New Arrivals"}</div>
-                <Carousel carouselContents={carouselContents}/>
+                <HomepageCarouselWrapper params={{sort: 'createdat', sortmode: 'DESC', limit: '10'}}/>
             </div>
 
             <HomepageHero 
@@ -72,7 +73,7 @@ export default function Homepage()
                         fontSize : '1.3em'
                     }}
                 >{"Most Popular"}</div>
-                <Carousel carouselContents={carouselContents}/>
+                <HomepageCarouselWrapper params={{sort: 'numpurchases', sortmode: 'DESC', limit: '10'}}/>
             </div>
 
             <OurStory />

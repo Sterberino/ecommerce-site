@@ -12,10 +12,10 @@ const DropdownSelect = () => {
     return (
         <select value={selectedOption} onChange={handleChange}>
             <option value="">Sort By</option>
-            <option value="option1">A-Z</option>
-            <option value="option2">Price(Hi - Lo)</option>
-            <option value="option3">Price(Lo - Hi)</option>
-            <option value="option4">Most Popular</option>
+            <option value="option1">{'A-Z'}</option>
+            <option value="option2">{'Price (High-Low)'}</option>
+            <option value="option3">{'Price (Low-High)'}</option>
+            <option value="option4">{'Most Popular'}</option>
         </select>
     );
 }

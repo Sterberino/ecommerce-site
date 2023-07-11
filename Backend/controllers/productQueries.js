@@ -30,10 +30,32 @@ const GetProducts = async (req, res) => {
     //is the product on sale?
     let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
 
+    let orderByQuery = 'productId';
+    let orderModeQuery = sortMode ? sortMode : 'ASC';
+
+    let limitQuery = limit ? ` LIMIT ${limit}` : '';
+    console.log(limitQuery)
+
     //perform the query with all of the relevant search conditions.
     try{
         const results = await pool.query(
-            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY productId ASC`);
+            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}`);
+            //This is stupid of me but I couldn't figure out how to conditionally sort using one column or another
+            //based on the status of a third column, so I'm just sorting the values here using plain old javascript (if sorting by price)
+            if(sort && sort === 'productprice')
+            {
+                let payload = results.rows.sort((a, b) => {
+                    if(orderModeQuery === 'ASC')
+                    {
+                        return((a.productisonsale === true ? a.productsaleprice : a.productprice) - (b.productisonsale  === true ? b.productsaleprice : b.productprice))
+                    }
+                    else{
+                        return((b.productisonsale  === true ? b.productsaleprice : b.productprice) - (a.productisonsale  === true ? a.productsaleprice : a.productprice))
+                    }
+                });
+                return res.status(200).json({payload: payload, entries: results.rowCount})
+
+            }            
             res.status(200).json({payload: results.rows, entries: results.rowCount})
         
     }
@@ -47,8 +69,6 @@ const GetProducts = async (req, res) => {
 const getPriceQuery = (minPrice, maxPrice) => {
     let priceQuery = 'true';
 
-    console.log(`Min Price: ${minPrice}, Max Price: ${maxPrice}`)
-
     if(minPrice !== undefined && maxPrice !== undefined)
     {
         priceQuery = `((productisonsale = false AND productprice BETWEEN ${minPrice} AND ${maxPrice}) OR ((productisonsale = true AND productsaleprice BETWEEN ${minPrice} AND ${maxPrice})))`
@@ -61,8 +81,6 @@ const getPriceQuery = (minPrice, maxPrice) => {
     {
         priceQuery = `((productisonsale = false AND productprice < ${maxPrice}) OR (productisonsale = true AND productsaleprice < ${maxPrice}))`
     }
-
-    console.log(priceQuery);
 
     return priceQuery;
 }

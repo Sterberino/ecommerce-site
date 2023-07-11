@@ -1,16 +1,30 @@
 import React from "react";
-import { ProductsContext } from "../../App.js";
+import useGetProducts from "../Hooks/useGetProducts";
+import Carousel from "./Carousel";
+import BlackMirrorSpinner from "./BlackMirrorSpinner";
+import CarouselProductCard from "./CarouselProductCard";
 
-
-export default function useGetProducts()
+export default function HomepageCarouselWrapper({params})
 {
     const[fetchingProducts, setFetchingProducts] = React.useState(true);
-    const[queryParams, setQueryParams] = React.useState({})
     const [results, setResults] = React.useState(null);
-    const {products, setProducts} = React.useContext(ProductsContext);
-   
+
+    const GetCarouselContents =()=>{
+        const res = results.products.slice(0, 10).map((current, i) => {
+            return (
+                <CarouselProductCard 
+                    key = {i}
+                    product = {current}
+                />
+            )
+        });
+
+        return res;
+    }
+
+    
     const GetQueryString = ()=>{
-        let queryString = new URLSearchParams(queryParams).toString();        
+        let queryString = new URLSearchParams(params).toString();        
         if(queryString === '')
         {
             return queryString;
@@ -21,7 +35,7 @@ export default function useGetProducts()
     }
 
     React.useEffect(()=>{    
-        if(fetchingProducts || products.requiresUpdate)
+        if(fetchingProducts)
         {
             fetch(`../api/v1/products${GetQueryString()}`, 
             {
@@ -34,10 +48,6 @@ export default function useGetProducts()
             .then(res => res.json())
             .then(res => {
                 const{payload} = res;
-                setProducts({
-                    requiresUpdate: false,
-                    products : payload
-                })
                 setResults({
                     requiresUpdate: false,
                     products : payload
@@ -49,8 +59,14 @@ export default function useGetProducts()
         }
     }, [fetchingProducts])
 
-    return [fetchingProducts, setFetchingProducts, 
-            queryParams, setQueryParams,
-            results
-        ];
+    if(fetchingProducts)
+    {
+        return <BlackMirrorSpinner style = {{
+            width: '100%',
+            justifyContent: 'center'}} 
+        />
+    }
+    else{
+        return <Carousel carouselContents = {GetCarouselContents()}/>
+    }
 }

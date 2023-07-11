@@ -31,7 +31,7 @@ export default function ProductFilterHeader({})
                 break;
             case 'Price (Low-High)':
                 sort = 'productprice';
-                sortMode = 'DESC';  
+                sortMode = 'ASC';  
                 break;
             case 'Latest':
                 sort = 'createdat';
@@ -54,7 +54,7 @@ export default function ProductFilterHeader({})
 
             query.appliedQuery.sort = sort;
             query.appliedQuery.sortMode = sortMode;
-
+            query.requiresRefresh = true;
             setQueryValues(query);
         }
     }
