@@ -141,7 +141,7 @@ export default function ProductFilter({filters, setFilters})
             />
             {onSaleFilterOpen && 
             <OnSaleFilter 
-                initialVal={queryValues.appliedQuery.onSale ? queryValues.appliedQuery.onSale : null}
+                initialVal={queryValues.appliedQuery.onSale ? queryValues.unappliedQuery.onSale ? queryValues.unappliedQuery.onSale :  queryValues.appliedQuery.onSale : null}
                 onValueChanged={(val)=> {
                     HandleSaleChange(val)
                 }}

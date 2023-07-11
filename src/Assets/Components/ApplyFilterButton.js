@@ -10,6 +10,11 @@ export default function ApplyFilterButton()
     const {queryValues, setQueryValues} = React.useContext(queryContext);
     //TODO: Add callback for updating query context
     const handleClick = ()=> {
+        if(Object.keys(queryValues.unappliedQuery).length === 0)
+        {
+            return;
+        }
+        
         let query = {
             ...queryValues
         };
