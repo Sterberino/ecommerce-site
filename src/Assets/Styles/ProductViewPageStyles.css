@@ -33,6 +33,17 @@
   align-self: start;
 }
 
+/*Column containing the products grid and pagination element */
+.products-column{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+
+  align-items: center;
+  justify-content: start;
+}
 
 @media only screen and (max-width: 640px) {
   .product-filter{

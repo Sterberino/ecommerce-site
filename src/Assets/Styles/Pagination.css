@@ -1,0 +1,42 @@
+.pagination-row{
+    position: relative;
+    display: flex;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin: 40px;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.pagination-box{
+    position: relative;
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    margin: 2px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(170,170,170,1);
+    transition: all 0.25s ease;
+}
+
+.pagination-box:hover{
+    border: 1px solid rgba(230,230,230,1);
+}
+
+.pagination-box > *{
+    left: 50%;
+    top: 25%;
+    width: fit-content;
+    transform: translate(-25%, 0%);
+}

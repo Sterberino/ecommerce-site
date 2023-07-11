@@ -14,6 +14,8 @@ import useGetProducts from "../Hooks/useGetProducts.js";
 import Spinner from "./Spinner.js";
 import BlackMirrorSpinner from "./BlackMirrorSpinner.js";
 import useWindowSize from "../Hooks/useWindowSize.js";
+import Pagination from "./Pagination.js";
+import useGetProductCount from "../Hooks/useGetProductCount.js";
 
 //For sub elements controlling if the filter should be open or not. (when mobile view)
 export const filterContext = React.createContext();
@@ -25,6 +27,8 @@ export const queryContext = React.createContext();
 export default function ProductViewPage() {
   const [queryValues, setQueryValues] = React.useState({appliedQuery: {limit: 9}, unappliedQuery: {limit: 9}, requiresRefresh: true});
   const[fetchingProducts, setFetchingProducts, queryParams, setQueryParams] = useGetProducts(queryValues.appliedQuery);
+  const [fetchingCount, setFetchingCount, countQueryParams, setCountQueryParams, countResults] = useGetProductCount(queryValues.appliedQuery)
+  
   const productCards = useGetCards();
   
   const [windowWidth, windowHeight] = useWindowSize();
@@ -51,7 +55,7 @@ const AssignFilterState = ()=>{
 
   React.useEffect(()=>{
     AssignFilterState();
-  }, [fetchingProducts]);
+  }, [fetchingProducts, fetchingCount]);
 
   React.useEffect(()=>{
     AssignFilterState();
@@ -65,13 +69,29 @@ const AssignFilterState = ()=>{
         requiresRefresh: false
       };
       setQueryValues(newQuery);
+      
       setQueryParams(queryValues.appliedQuery);
       setFetchingProducts(true);
+    
+      setCountQueryParams(newQuery);
+      setFetchingCount(true);
     }
   }, [queryValues]);
   
+  const GetProductColumn = ()=>{
+    return(
+      <div className="products-column">
+        <ProductGrid products={productCards}/>
+        <Pagination 
+          itemsPerPage={9}
+          totalItems={countResults}
+        />
+      </div>
+    )
+  }
 
-  if(fetchingProducts)
+
+  if(fetchingProducts || fetchingCount) 
   {
     return(
       <queryContext.Provider value = {{queryValues: queryValues, setQueryValues: setQueryValues}}>
@@ -104,13 +124,15 @@ const AssignFilterState = ()=>{
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}
           {productCards.length > 0 ? 
-            <ProductGrid products={productCards}/> : 
+
+           GetProductColumn() : 
             <div style = {{
               alignSelf: 'center',
               justifySelf: 'start',
               width: '100%', 
               marginBottom: "100px"
-            }} className="title-text">{"No Results"}</div>}
+            }} className="title-text">{"No Results"}</div>
+          }
         </div>
         <SiteFooter />
       </div>

@@ -11,8 +11,6 @@ export default function useGetProducts(initialVal = null)
    
     const GetQueryString = ()=>{
         let queryString = new URLSearchParams(queryParams).toString();        
-        console.log(initialVal)
-        console.log(`Query String: ${queryString}`)
         if(queryString === '')
         {
             return queryString;
