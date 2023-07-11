@@ -23,15 +23,14 @@ export const queryContext = React.createContext();
 
 
 export default function ProductViewPage() {
-  const{products, setProducts} = React.useContext(ProductsContext);
-  const[fetchingProducts, setFetchingProducts, queryParams, setQueryParams] = useGetProducts();
+  const [queryValues, setQueryValues] = React.useState({appliedQuery: {limit: 9}, unappliedQuery: {limit: 9}, requiresRefresh: true});
+  const[fetchingProducts, setFetchingProducts, queryParams, setQueryParams] = useGetProducts(queryValues.appliedQuery);
   const productCards = useGetCards();
   
   const [windowWidth, windowHeight] = useWindowSize();
   const[lastWindowWidth, setLastWindowWidth] = React.useState(window.innerWidth);
   
   const[filterOpen, setFilterOpen] = React.useState(windowWidth > 640 ? true : false);
-  const [queryValues, setQueryValues] = React.useState({appliedQuery: {}, unappliedQuery: {}, requiresRefresh: false});
   
 const AssignFilterState = ()=>{
     //Switch filter visibility on
@@ -65,16 +64,12 @@ const AssignFilterState = ()=>{
         ...queryValues,
         requiresRefresh: false
       };
-
       setQueryValues(newQuery);
-      console.log("Non-empty query");
       setQueryParams(queryValues.appliedQuery);
       setFetchingProducts(true);
     }
   }, [queryValues]);
   
- console.log(JSON.stringify( queryValues))
-
 
   if(fetchingProducts)
   {

@@ -58,7 +58,7 @@ export default function Homepage()
                         fontSize : '1.3em'
                     }}
                 >{"New Arrivals"}</div>
-                <HomepageCarouselWrapper params={{sort: 'createdat', sortmode: 'DESC', limit: '10'}}/>
+                <HomepageCarouselWrapper params={{sort: 'createdat', sortMode: 'DESC', limit: '10'}}/>
             </div>
 
             <HomepageHero 

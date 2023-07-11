@@ -9,7 +9,45 @@ const pool = new Pool({
     port: process.env.PG_PORT
 })
 
-//TODO: Add Query options
+const GetProductsCount = async(req, res) => {
+    const {
+        minPrice, 
+        maxPrice,
+        minPurchases,
+        maxPurchases,
+        sort,//What are we sorting by (price, purchases, name)
+        sortMode,//ASC or DESC
+        onSale,
+        offset,
+        limit//Number of entries per page
+    } = req.query;
+
+    //Get the price condition. If no query, default to true
+    let priceQuery = getPriceQuery(minPrice, maxPrice);
+    //Get the number of purchases condition. If no query, default to true
+    let purchasesQuery = getPurchasesQuery(minPurchases, maxPurchases);
+    //is the product on sale?
+    let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
+    
+    let orderByQuery = 'productId';
+    let orderModeQuery = 'ASC';
+    let limitQuery = '';
+
+    //perform the query with all of the relevant search conditions.
+    try{
+        const results = await pool.query(
+            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}`);            
+            res.status(200).json({entries: results.rowCount})
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.status(500).send('something went wrong');
+    }
+
+}
+
 const GetProducts = async (req, res) => {
     const {
         minPrice, 
@@ -29,12 +67,9 @@ const GetProducts = async (req, res) => {
     let purchasesQuery = getPurchasesQuery(minPurchases, maxPurchases);
     //is the product on sale?
     let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
-
     let orderByQuery = sort ? sort : 'productId';
     let orderModeQuery = sortMode ? sortMode : 'ASC';
-
     let limitQuery = limit ? ` LIMIT ${limit}` : '';
-    console.log(limitQuery)
 
     //perform the query with all of the relevant search conditions.
     try{
@@ -233,6 +268,7 @@ const DeleteProduct = async (req, res) => {
 module.exports = {
     CreateProduct,
     GetProducts,
+    GetProductsCount,
     GetProductById,
     UpdateProduct,
     DeleteProduct

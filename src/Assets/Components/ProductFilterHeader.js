@@ -34,7 +34,7 @@ export default function ProductFilterHeader({})
                 sortMode = 'ASC';  
                 break;
             case 'Latest':
-                sort = 'createdat';
+                sort = 'createdat'; 
                 sortMode = 'DESC';
                 break;
             case 'Most Popular':

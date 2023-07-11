@@ -2,20 +2,21 @@ import React from "react";
 import { ProductsContext } from "../../App.js";
 
 
-export default function useGetProducts()
+export default function useGetProducts(initialVal = null)
 {
     const[fetchingProducts, setFetchingProducts] = React.useState(true);
-    const[queryParams, setQueryParams] = React.useState({})
+    const[queryParams, setQueryParams] = React.useState(initialVal === null ? {} : initialVal)
     const [results, setResults] = React.useState(null);
     const {products, setProducts} = React.useContext(ProductsContext);
    
     const GetQueryString = ()=>{
         let queryString = new URLSearchParams(queryParams).toString();        
+        console.log(initialVal)
+        console.log(`Query String: ${queryString}`)
         if(queryString === '')
         {
             return queryString;
         }
-
         const objString = '?' + queryString;
         return objString;
     }
