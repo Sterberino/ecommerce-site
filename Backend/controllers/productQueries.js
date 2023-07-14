@@ -70,11 +70,12 @@ const GetProducts = async (req, res) => {
     let orderByQuery = sort ? sort : 'productId';
     let orderModeQuery = sortMode ? sortMode : 'ASC';
     let limitQuery = limit ? ` LIMIT ${limit}` : '';
+    let offsetQuery = offset ? ` OFFSET ${offset}` : '';
 
     //perform the query with all of the relevant search conditions.
     try{
         const results = await pool.query(
-            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}`);
+            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}${offsetQuery}`);
             //This is stupid of me but I couldn't figure out how to conditionally sort using one column or another
             //based on the status of a third column, so I'm just sorting the values here using plain old javascript (if sorting by price)
             if(sort && sort === 'productprice')

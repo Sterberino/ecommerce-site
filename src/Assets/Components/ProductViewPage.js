@@ -25,7 +25,7 @@ export const queryContext = React.createContext();
 
 
 export default function ProductViewPage() {
-  const [queryValues, setQueryValues] = React.useState({appliedQuery: {limit: 9}, unappliedQuery: {limit: 9}, requiresRefresh: true});
+  const [queryValues, setQueryValues] = React.useState({appliedQuery: {limit: 9, offset: 0}, unappliedQuery: {limit: 9, offset: 0}, requiresRefresh: true});
   const[fetchingProducts, setFetchingProducts, queryParams, setQueryParams] = useGetProducts(queryValues.appliedQuery);
   const [fetchingCount, setFetchingCount, countQueryParams, setCountQueryParams, countResults] = useGetProductCount(queryValues.appliedQuery)
   
@@ -83,8 +83,20 @@ const AssignFilterState = ()=>{
       <div className="products-column">
         <ProductGrid products={productCards}/>
         <Pagination 
+          initialIndex={Math.floor(Number(queryValues.appliedQuery.offset) / 9)}
           itemsPerPage={9}
           totalItems={countResults}
+          onChangeIndex={(index)=> {
+            let newQuery = {
+              ...queryValues
+            }
+            newQuery.requiresRefresh = true;
+            newQuery.appliedQuery.offset = 9 * index;
+            newQuery.unappliedQuery.offset = 9 * index;
+
+            setQueryValues(newQuery);
+            //window.getElementById('productViewLabel').scrollIntoView();
+          }}
         />
       </div>
     )
@@ -98,7 +110,7 @@ const AssignFilterState = ()=>{
     <filterContext.Provider value={{filterOpen: filterOpen, setFilterOpen : setFilterOpen}}>
       <div>
       <SiteHeader />
-      <ProductViewLabel/>
+      <div className='title-text' id="productViewLabel" style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
       <ProductFilterHeader/>
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}
@@ -119,7 +131,7 @@ const AssignFilterState = ()=>{
     <filterContext.Provider value={{filterOpen: filterOpen, setFilterOpen : setFilterOpen}}>
       <div>
       <SiteHeader />
-      <ProductViewLabel/>
+      <div className='title-text' id="productViewLabel" style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
       <ProductFilterHeader/>
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}
