@@ -7,6 +7,7 @@ import CarouselProductCard from "./CarouselProductCard";
 import { ProductsContext } from "../../App";
 
 import usePostCart from "../Hooks/usePostCart";
+import HomepageCarouselWrapper from "./HomepageCarouselWrapper";
 
 export default function SingleProductView({product}){
     const {products, setProducts} = React.useContext(ProductsContext)
@@ -24,15 +25,6 @@ export default function SingleProductView({product}){
         productseller
       } = product;
    
-
-    const carouselContents = products.products.slice(0, 10).map((current, i) => {
-        return (
-            <CarouselProductCard 
-                key = {i}
-                product = {current}
-            />
-        )
-    });
 
     const ChangeSelection = (selection)=> {
         setProductQuantity(Number(selection));
@@ -61,12 +53,36 @@ export default function SingleProductView({product}){
                         options={[1,2,3]}
                         onChangeSelection={(selection)=> {ChangeSelection(selection)}}    
                     />
-                    <div 
-                        className="title-text"
-                        style={{marginTop:"15%"}}
-                    >
-                        {`$${Number(productQuantity) * Number(product.productprice)}`}
-                    </div>
+
+                    {product.productisonsale ? 
+                        <div
+                        className="simple-row"
+                        style = {{
+                            marginTop:"15%"
+                        }}
+                        >
+                        <div 
+                            className='title-text'
+                            style={{
+                            
+                            }}
+                        >{`$${Number(productQuantity) * Number(product.productsaleprice)}`}</div>
+                        <div 
+                            className='canceled-text'
+                            style={{
+                            fontSize: '0.75em',
+                            marginLeft: '10px',
+                            height: '100%'
+                            }}
+                        >{`List: $${Number(productQuantity) * Number(product.productprice)}`}</div>
+                        </div> :
+                        <div 
+                        className='title-text'
+                        style={{
+
+                        }}
+                        >{`$${Number(productQuantity) * Number(product.productprice)}`}</div>
+                    }
                     <div  
                         className="submit-button"
                         onClick = {()=> {postCartItem()}}    
@@ -77,7 +93,7 @@ export default function SingleProductView({product}){
             </div>
 
             <div style={{fontSize:"1.4em"}} className="title-text">{"You might also like"}</div>
-            <Carousel carouselContents={carouselContents}/>
+            <HomepageCarouselWrapper />
             
         </div>
     )
