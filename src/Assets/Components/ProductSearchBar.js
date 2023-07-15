@@ -2,9 +2,9 @@ import React from "react";
 
 import "../Styles/SearchBarStyles.css"
 
-export default function ProductSearchBar({onSearch, hideSearchIcon, style})
+export default function ProductSearchBar({onSearch, hideSearchIcon, style, initialText, updateOnTextChange})
 {
-    const [searchInput, setSearchInput] = React.useState("");
+    const [searchInput, setSearchInput] = React.useState(initialText ? `${initialText}` : "");
     const [hideIcon, setHideIcon] = React.useState(hideSearchIcon ? hideSearchIcon : false);
 
     return(
@@ -24,7 +24,17 @@ export default function ProductSearchBar({onSearch, hideSearchIcon, style})
                 value={searchInput}
                 size={"5"}
                 placeholder = "Search Products"
-                onChange={(e)=>{setSearchInput(e.target.value)}}
+                onChange={(e)=>{
+                    e.preventDefault();
+                    setSearchInput(e.target.value)
+                    if(updateOnTextChange === true)
+                    {
+                        if(onSearch !== null && onSearch !== undefined)
+                        {
+                            onSearch(e.target.value)
+                        }
+                    }
+                }}
             >
             </input>
             {!hideIcon && <img 

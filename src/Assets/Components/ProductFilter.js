@@ -95,6 +95,27 @@ export default function ProductFilter({filters, setFilters})
         setQueryValues(query);
     }
 
+    const HandleSearchChange = (value)=> {
+        let query = {
+            ...queryValues,
+        }
+
+        let originalApplied = query.appliedQuery.search;
+        if(value !== null)
+        {
+            query.unappliedQuery.search = value;
+        }
+        else{
+            delete query.unappliedQuery.search;
+        }
+        
+        //If you don't include this line, the applied query updates as well. Why? Who knows. I wasn't able to figure out what the issue was.
+        query.appliedQuery.search = originalApplied
+        setQueryValues(query);
+
+        console.log(query.appliedQuery.search)
+    }
+
     return(
         <div className='product-filter'>
             {windowWidth <= 640 && <FilterCloseButton />}
@@ -164,7 +185,9 @@ export default function ProductFilter({filters, setFilters})
                 }}
             />
             {searchFilterOpen && <ProductSearchBar 
-                    onSearch={(val)=>{}}
+                    initialText={queryValues.unappliedQuery.search}
+                    updateOnTextChange={true}
+                    onSearch={(val)=>{HandleSearchChange(val)}}
                     hideSearchIcon={true}
                 />
             }
