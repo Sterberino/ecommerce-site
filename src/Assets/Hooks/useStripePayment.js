@@ -21,6 +21,7 @@ export default function useStripePayment()
                     body: JSON.stringify(bodyData)
                 })
                 const json = await data.json();
+                console.log(JSON.stringify( json))
                 window.location = json.url;
                 return json;
             }

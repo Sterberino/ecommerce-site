@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, json } from "react-router-dom";
 import '../Styles/loginStyles.css'
 import '../Styles/textStyles.css'
 
@@ -39,22 +39,25 @@ export default function Login()
                 },
                 body: JSON.stringify({
                     userName: registrationRequest.userName,
-                    email: registrationRequest.email,
-                    password: registrationRequest.password
+                    userEmail: registrationRequest.email,
+                    userPassword: registrationRequest.password
                 })
             })
                 .then(res => {
                     if(res.status !== 201) { 
-                    
-                    throw new Error(res.status)
-                } 
-                return res.json()})
+                        console.log('Res status not 201')
+                    } 
+                    return res.json()
+                })
                 .then(res => {
                     const token = res.token;
                     if(token)
                     {
                         localStorage.setItem('token', res.token)
                     }                   
+                    else{
+                     console.log(JSON.stringify(res))   
+                    }
                 })
                 .then(res=> {
                     if(localStorage.getItem('token'))

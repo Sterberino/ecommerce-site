@@ -6,9 +6,10 @@ import Login from "./Login"
 import '../Styles/SingleProductPage.css'
 import '../Styles/loginStyles.css'
 
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage(){
-
+    const navigate = useNavigate();
 
     return(
         <div>
@@ -49,6 +50,7 @@ export default function LoginPage(){
                             style = {{width: 'min-content'}}
                             type = "submit"
                             value={"Continue As Guest"}
+                            onClick={()=>{navigate('/cart')}}
                         ></input>
                     </form>
                 </div>

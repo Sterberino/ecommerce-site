@@ -65,7 +65,7 @@ const StripePurchase = async (req, res)=>{
                             name: item.productname,
                         
                         },
-                        unit_amount: Number(item.productprice) * 100 //needs to be in pennies for stripe to function
+                        unit_amount: (Boolean(item.productisonsale) ? Number(item.productsaleprice) : Number(item.productprice)) * 100 //needs to be in pennies for stripe to function
                     },
                     quantity: Number(item.cartquantity)  //hardcoded value for quantity for testing  
                 })

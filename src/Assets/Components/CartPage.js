@@ -110,12 +110,12 @@ export default function CartPage()
             )
             arr.push(
                 <div className="cart-grid-item" key = {i * 5 + 2}>
-                    <div className="title-text" style = {{margin: "5px"}}>{`$${cart.cartItems[i].productprice}`}</div>
+                    <div className="title-text" style = {{margin: "5px"}}>{`$${Boolean(cart.cartItems[i].productisonsale) ? cart.cartItems[i].productsaleprice : cart.cartItems[i].productprice}`}</div>
                 </div>
             )
             arr.push(
                 <div className="cart-grid-item" key = {i * 5 + 3}>
-                    <div className="title-text" style = {{margin: "5px"}}>{`$${cart.cartItems[i].cartquantity * cart.cartItems[i].productprice}`}</div>
+                    <div className="title-text" style = {{margin: "5px"}}>{`$${cart.cartItems[i].cartquantity * (Boolean(cart.cartItems[i].productisonsale) ? cart.cartItems[i].productsaleprice : cart.cartItems[i].productprice)}`}</div>
                 </div>
             )
             arr.push(
@@ -145,7 +145,7 @@ export default function CartPage()
         )
 
         let subtotal = cart.cartItems.reduce((accumulator, current)=> {
-            return accumulator + Number(current.cartquantity) * Number(current.productprice);
+            return accumulator + Number(current.cartquantity) * Number(Boolean(current.productisonsale) ? current.productsaleprice : current.productprice);
         }, 0)
         
 

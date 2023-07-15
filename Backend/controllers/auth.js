@@ -48,7 +48,7 @@ const Register = async(req, res)=> {
 
     if(!userEmail || !userName || !userPassword)
     {
-        throw new Error("Please provide a username, email, and password");
+        return res.status(StatusCodes.UNAUTHORIZED).json({error: 'Please provide a valid username, email, and password.'})
     }
 
 
@@ -69,7 +69,7 @@ const Register = async(req, res)=> {
     let user  = await CheckForEmail(userEmail);
     if(user)
     {
-        throw new Error(`User already exists with email ${userEmail}`);
+        return res.status(StatusCodes.UNAUTHORIZED).json({msg: `User already exists with email ${userEmail}`});
     }
 
     //Generate the salt and hash the password before storing
