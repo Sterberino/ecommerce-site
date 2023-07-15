@@ -26,7 +26,7 @@ export default function ProductViewPage() {
   const location = useLocation();
 
   const [queryValues, setQueryValues] = React.useState({appliedQuery: {...location.state, limit: 9, offset: 0}, unappliedQuery: {...location.state, limit: 9, offset: 0}, requiresRefresh: true});
-  const[fetchingProducts, setFetchingProducts, queryParams, setQueryParams] = useGetProducts(queryValues.appliedQuery);
+  const[fetchingProducts, setFetchingProducts, queryParams, setQueryParams, results] = useGetProducts(queryValues.appliedQuery);
   const [fetchingCount, setFetchingCount, countQueryParams, setCountQueryParams, countResults] = useGetProductCount(queryValues.appliedQuery)
   
   const productCards = useGetCards();

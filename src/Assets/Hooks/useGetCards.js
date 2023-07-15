@@ -14,6 +14,7 @@ export default function useGetCards()
             <ProductDisplayCard 
                 key = {index}
                 product = {item}
+                delay = {(index + 1) *  0.1}
             />
         )
     })

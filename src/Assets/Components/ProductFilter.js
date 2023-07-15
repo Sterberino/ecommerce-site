@@ -112,8 +112,6 @@ export default function ProductFilter({filters, setFilters})
         //If you don't include this line, the applied query updates as well. Why? Who knows. I wasn't able to figure out what the issue was.
         query.appliedQuery.search = originalApplied
         setQueryValues(query);
-
-        console.log(query.appliedQuery.search)
     }
 
     return(

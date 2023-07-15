@@ -16,6 +16,25 @@
     background-size: contain;
 }
 
+.canceled-text{
+    margin-left: 5px;
+    color: rgba(100, 100, 100, 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 0.6em;
+    
+
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.15);
+    text-align: center;
+    text-decoration: line-through;
+    
+    
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+}
+
 .basic-text{
     margin-left: 5px;
     color: rgb(190, 190, 190);
