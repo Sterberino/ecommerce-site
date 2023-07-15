@@ -20,7 +20,7 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
         //Current page
         let element = 
         (<div 
-            className="pagination-box"
+            className="current-pagination-box"
             key = {index}
         >
             <div className="title-text">{`${index+1}`}</div>
@@ -37,7 +37,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index + 1}
-                    onClick={()=>{onClickPaginationButton(index + 1)}}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(index + 1)
+                    }}
                 >
                     <div className="title-text">{`${index+2}`}</div>
                 </div>);
@@ -49,7 +53,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index + 1}
-                    onClick={()=>{onClickPaginationButton(index + 1)}}
+                    onClick={(e)=>{
+                        e.preventDefault();  
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})  
+                        onClickPaginationButton(index + 1)
+                    }}
                 >
                     <div className="title-text">{`${index+2}`}</div>
                 </div>);
@@ -59,7 +67,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index + 2}
-                    onClick={()=>{onClickPaginationButton(index + 2)}}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(index + 2)
+                    }}
                 >
                     <div className="title-text">{`${index+3}`}</div>
                 </div>);
@@ -71,7 +83,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index + 1}
-                    onClick={()=>{onClickPaginationButton(index + 1)}}
+                    onClick={(e)=>{
+                        e.preventDefault();    
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(index + 1)
+                    }}
                 >
                     <div className="title-text">{`${index+2}`}</div>
                 </div>);
@@ -90,7 +106,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index + 3}
-                    onClick={()=>{onClickPaginationButton(pages - 1)}}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(pages - 1)
+                    }}
                 >
                     <div className="title-text">{`${pages}`}</div>
                 </div>);
@@ -121,7 +141,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index -1}
-                    onClick={()=>{onClickPaginationButton(index - 1)}}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(index - 1)
+                    }}
                 >
                     <div className="title-text">{`${index}`}</div>
                 </div>);
@@ -131,7 +155,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index - 2}
-                    onClick={()=>{onClickPaginationButton(index - 2)}}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(index - 2)
+                    }}
                 >
                     <div className="title-text">{`${index - 1}`}</div>
                 </div>);
@@ -143,7 +171,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index - 1}
-                    onClick={()=>{onClickPaginationButton(index - 1)}}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(index - 1);
+                    }}
                 >
                     <div className="title-text">{`${index}`}</div>
                 </div>);
@@ -162,7 +194,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
                 (<div 
                     className="pagination-box"
                     key = {index - 3}
-                    onClick={()=>{onClickPaginationButton(0)}}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        onClickPaginationButton(0)
+                    }}
                 >
                     <div className="title-text">{`${1}`}</div>
                 </div>);
@@ -176,9 +212,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
         (<div 
             className = {`${toEnd === 0 ? 'pagination-endcap-unselectable' : 'pagination-endcap-button'}`}
             key = {pages + 1}
-            onClick={()=>{
+            onClick={(e)=>{
                 if(toEnd !== 0)
                 {
+                    e.preventDefault();
+                    window.scrollTo({top: 0, left: 0, behavior: "instant"})
                     onClickPaginationButton(index + 1)
                 }                
             }}
@@ -191,9 +229,11 @@ export default function Pagination({itemsPerPage, totalItems, initialIndex, onCh
         (<div 
             className = {`${toStart === 0 ? 'pagination-endcap-unselectable' : 'pagination-endcap-button'}`}
             key = {-1}
-            onClick={()=>{
+            onClick={(e)=>{
                 if(toStart !== 0)
                 {
+                    e.preventDefault();
+                    window.scrollTo({top: 0, left: 0, behavior: "instant"})
                     onClickPaginationButton(index - 1)
                 }
             }}

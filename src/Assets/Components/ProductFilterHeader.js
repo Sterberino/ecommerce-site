@@ -54,6 +54,8 @@ export default function ProductFilterHeader({})
 
             query.appliedQuery.sort = sort;
             query.appliedQuery.sortMode = sortMode;
+            query.appliedQuery.offset = 0;
+            query.unappliedQuery.offset = 0;
             query.requiresRefresh = true;
             setQueryValues(query);
         }

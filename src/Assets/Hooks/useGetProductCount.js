@@ -11,6 +11,7 @@ export default function useGetProductCount(initialVal = null)
         let query = {...countQueryParams};
         delete query.limit;
         let queryString = new URLSearchParams(query).toString();        
+        
         if(queryString === '')
         {
             return queryString;

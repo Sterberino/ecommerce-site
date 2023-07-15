@@ -44,7 +44,8 @@ export default function ProductFilter({filters, setFilters})
         else{
             delete query.unappliedQuery.maxPurchases;
         }
-        console.log(JSON.stringify(query))
+        query.appliedQuery.offset = 0;
+        query.unappliedQuery.offset = 0;
         setQueryValues(query);
     }
     const HandlePriceChange = (values) => {
@@ -70,7 +71,8 @@ export default function ProductFilter({filters, setFilters})
         else{
             delete query.unappliedQuery.maxPrice;
         }
-        console.log(JSON.stringify(query))
+        query.appliedQuery.offset = 0;
+        query.unappliedQuery.offset = 0;
         setQueryValues(query);
     }
 
@@ -85,6 +87,8 @@ export default function ProductFilter({filters, setFilters})
         else{
             delete query.unappliedQuery.onSale;
         }
+        query.appliedQuery.offset = 0;
+        query.unappliedQuery.offset = 0;
         setQueryValues(query);
     }
 

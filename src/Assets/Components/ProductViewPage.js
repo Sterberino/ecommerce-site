@@ -70,14 +70,25 @@ const AssignFilterState = ()=>{
       };
       setQueryValues(newQuery);
       
-      setQueryParams(queryValues.appliedQuery);
+      setQueryParams(newQuery.appliedQuery);
       setFetchingProducts(true);
     
-      setCountQueryParams(newQuery);
+      setCountQueryParams(newQuery.appliedQuery);
       setFetchingCount(true);
     }
   }, [queryValues]);
   
+  const updatePagination = (index)=> {
+    let newQuery = {
+      ...queryValues
+    }
+    newQuery.requiresRefresh = true;
+    newQuery.appliedQuery.offset = 9 * index;
+    newQuery.unappliedQuery.offset = 9 * index;
+  
+    setQueryValues(newQuery);
+  }
+
   const GetProductColumn = ()=>{
     return(
       <div className="products-column">
@@ -86,17 +97,7 @@ const AssignFilterState = ()=>{
           initialIndex={Math.floor(Number(queryValues.appliedQuery.offset) / 9)}
           itemsPerPage={9}
           totalItems={countResults}
-          onChangeIndex={(index)=> {
-            let newQuery = {
-              ...queryValues
-            }
-            newQuery.requiresRefresh = true;
-            newQuery.appliedQuery.offset = 9 * index;
-            newQuery.unappliedQuery.offset = 9 * index;
-
-            setQueryValues(newQuery);
-            //window.getElementById('productViewLabel').scrollIntoView();
-          }}
+          onChangeIndex={(index)=> {updatePagination(index)}}
         />
       </div>
     )
@@ -110,7 +111,7 @@ const AssignFilterState = ()=>{
     <filterContext.Provider value={{filterOpen: filterOpen, setFilterOpen : setFilterOpen}}>
       <div>
       <SiteHeader />
-      <div className='title-text' id="productViewLabel" style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
+      <div className='title-text' style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
       <ProductFilterHeader/>
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}
@@ -131,7 +132,7 @@ const AssignFilterState = ()=>{
     <filterContext.Provider value={{filterOpen: filterOpen, setFilterOpen : setFilterOpen}}>
       <div>
       <SiteHeader />
-      <div className='title-text' id="productViewLabel" style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
+      <div className='title-text' style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
       <ProductFilterHeader/>
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}
