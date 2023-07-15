@@ -1,0 +1,51 @@
+.purchase-button{
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    right: 0px;
+    left: 0px;
+    background-color: rgba(63, 162, 79, 1);
+    bottom: -55px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    
+    box-shadow: 
+        inset 0px 5px 5px rgba(255, 255, 255, 0.25 ),
+        inset 0px -5px 10px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(8,89,10,1);
+    transition: all 0.25s ease;
+
+    z-index: 2;
+}
+
+.purchase-button > .img-wrapper> img{
+    position: relative;
+
+    height: 80%;
+    aspect-ratio: 1 / 1;
+}
+
+.purchase-button > .img-wrapper{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 50%;
+    aspect-ratio: 1 / 1;
+    margin-left: 15px;
+
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    border: 1px solid rgba(210, 210, 210, 1);
+}
+
+.purchase-button > .title-text{
+    flex-grow: 1;
+    margin-left: 0;
+    background-image: linear-gradient(white, rgb(190, 190, 190));
+}
