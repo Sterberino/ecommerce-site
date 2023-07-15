@@ -2,7 +2,7 @@
     position: absolute;
 
     top: 60%;
-    
+    bottom: auto;
     right: 10%;
     left: auto !important;
     
@@ -26,5 +26,7 @@
 
 
 @media only screen and (max-width: 640px) {
-   
+    .apply-filter-button{
+        top: 75%;
+    }
 }

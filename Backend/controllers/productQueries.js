@@ -15,11 +15,8 @@ const GetProductsCount = async(req, res) => {
         maxPrice,
         minPurchases,
         maxPurchases,
-        sort,//What are we sorting by (price, purchases, name)
-        sortMode,//ASC or DESC
         onSale,
-        offset,
-        limit//Number of entries per page
+        search
     } = req.query;
 
     //Get the price condition. If no query, default to true
@@ -28,7 +25,8 @@ const GetProductsCount = async(req, res) => {
     let purchasesQuery = getPurchasesQuery(minPurchases, maxPurchases);
     //is the product on sale?
     let saleQuery = onSale ? `productisonsale = ${onSale === "true" ? "True" : "False"}` : 'true';
-    
+    let searchQuery = search ? `"productname" LIKE '%${search}%'` : 'true'
+
     let orderByQuery = 'productId';
     let orderModeQuery = 'ASC';
     let limitQuery = '';
@@ -36,7 +34,7 @@ const GetProductsCount = async(req, res) => {
     //perform the query with all of the relevant search conditions.
     try{
         const results = await pool.query(
-            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}`);            
+            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} AND ${searchQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}`);            
             res.status(200).json({entries: results.rowCount})
         
     }
@@ -58,7 +56,8 @@ const GetProducts = async (req, res) => {
         sortMode,//ASC or DESC
         onSale,
         offset,
-        limit//Number of entries per page
+        limit,//Number of entries per page
+        search
     } = req.query;
 
     //Get the price condition. If no query, default to true
@@ -71,11 +70,12 @@ const GetProducts = async (req, res) => {
     let orderModeQuery = sortMode ? sortMode : 'ASC';
     let limitQuery = limit ? ` LIMIT ${limit}` : '';
     let offsetQuery = offset ? ` OFFSET ${offset}` : '';
+    let searchQuery = search ? `"productname" LIKE '%${search}%'` : 'true'
 
     //perform the query with all of the relevant search conditions.
     try{
         const results = await pool.query(
-            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}${offsetQuery}`);
+            `SELECT * FROM products WHERE ${saleQuery} AND ${priceQuery} AND ${purchasesQuery} AND ${searchQuery} ORDER BY ${orderByQuery} ${orderModeQuery}${limitQuery}${offsetQuery}`);
             //This is stupid of me but I couldn't figure out how to conditionally sort using one column or another
             //based on the status of a third column, so I'm just sorting the values here using plain old javascript (if sorting by price)
             if(sort && sort === 'productprice')

@@ -14,7 +14,6 @@ export default function ProductFilterHeader({})
     const {queryValues, setQueryValues} = React.useContext(queryContext);
 
     const HandleSelectionChange = (val)=>{
-        console.log(val);
         let sort = null;
         let sortMode = null;
 

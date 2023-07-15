@@ -19,7 +19,27 @@
     align-items: center;
 }
 
+.product-filter > .search-bar{
+  position: relative;
+  left: 5%;
+  margin: 0px;
+  margin-top: 2px;
+  width: 80%;
+  right: auto;
+  min-width: 80%;
+  max-width: 80%;
+  justify-self: start;
+  align-self: start;
 
+  justify-content: start;
+}
+
+.product-filter > .search-bar > input[type=text] {
+  width: 100% !important;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 6px;
+}
 
 .dropdown{
   position: relative;
@@ -32,6 +52,8 @@
   justify-self: start;
   align-self: start;
 }
+
+
 
 /*Column containing the products grid and pagination element */
 .products-column{
@@ -64,6 +86,7 @@
     left: 10% !important;
   }
   
+ 
   
   .product-filter > .filter-close-button{
     top: 5vh;

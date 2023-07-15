@@ -11,6 +11,7 @@ import FilterCloseButton from './FilterCloseButton';
 
 import { queryContext } from './ProductViewPage';
 import ApplyFilterButton from './ApplyFilterButton';
+import ProductSearchBar from './ProductSearchBar';
 
 export default function ProductFilter({filters, setFilters})
 {
@@ -20,6 +21,8 @@ export default function ProductFilter({filters, setFilters})
     const [priceFilterOpen, setPriceFilterOpen] = React.useState(false);
     const [purchasesFilterOpen, setPurchasesFilterOpen] = React.useState(false);
     const [onSaleFilterOpen, setOnSaleFilterOpen] = React.useState(false);
+    
+    const [searchFilterOpen, setSearchFilterOpen] = React.useState(false);
 
     const {queryValues, setQueryValues} = React.useContext(queryContext);
 
@@ -150,6 +153,20 @@ export default function ProductFilter({filters, setFilters})
                     HandleSaleChange(val)
                 }}
             />
+            }
+            <DropDownMenu 
+                dropDownText={"Search"}  
+                onChangeState={(val)=>{
+                    setSearchFilterOpen(val)
+                    if(val === false)
+                    {
+                    }
+                }}
+            />
+            {searchFilterOpen && <ProductSearchBar 
+                    onSearch={(val)=>{}}
+                    hideSearchIcon={true}
+                />
             }
             <ApplyFilterButton />
         </div>

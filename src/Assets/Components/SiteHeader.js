@@ -1,7 +1,7 @@
 import React from "react";
 import ProductSearchBar from '../Components/ProductSearchBar';
 import ProductCart from '../Components/ProductCart';
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 import '../Styles/textStyles.css'
 import '../Styles/SiteHeaderStyles.css'
@@ -27,7 +27,13 @@ export default function SiteHeader({})
     return(
         <div>
             <div className="site-header">
-                <ProductSearchBar/>
+                <ProductSearchBar
+                    onSearch={(searchVal)=>{
+                        navigate('/shop', {state: {search: searchVal}})
+                        navigate(0)
+                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                    }}
+                />
                 <div className='title-text'>Bored Ape Escape</div>
                 <div className="cart-group">
                     <div className="title-text" onClick={()=>{navigate('/login')}}>Sign In</div>

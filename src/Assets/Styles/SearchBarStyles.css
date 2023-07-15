@@ -4,6 +4,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 2px;
 }
 
 .search-bar > input[type=text] {
@@ -11,11 +12,9 @@
     margin: 0px;
     padding: 6px;
     padding-right: 30px;
-    width: 180px;
+    width:  180px;
     border-radius: 5px;
-    left: 10px;
-    background-position: 100% 50%;
-    background-repeat: no-repeat;
+    left: 0px;
     
     border: 1px solid rgba(190,190,190,0.5);
     background-color: rgba(0,0,0,0.4);
@@ -36,7 +35,7 @@
 
   .search-bar > img{
     position: absolute;
-    right: -5px;
+    right: 5px;
     left: auto;
     width: 25px;
     height: 25px;

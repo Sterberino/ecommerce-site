@@ -49,7 +49,8 @@ export default function Homepage()
 
             <HomepageHero 
                 imageUrl = {`${process.env.PUBLIC_URL}/Images/Monke.png`}
-                title={"Our Favorite Brands"}
+                title={"Brand New Brands"}
+                navigationState = {{sort: 'createdat', sortMode: 'DESC'}}
             />
             <div>
                 <div 
@@ -64,6 +65,7 @@ export default function Homepage()
             <HomepageHero 
                 imageUrl = {`${process.env.PUBLIC_URL}/Images/Monke2.png`}
                 title={"Best Sellers"}
+                navigationState = {{sort: 'numpurchases', sortMode: 'DESC'}}
             />
 
             <div>
@@ -73,7 +75,7 @@ export default function Homepage()
                         fontSize : '1.3em'
                     }}
                 >{"Most Popular"}</div>
-                <HomepageCarouselWrapper params={{sort: 'numpurchases', sortmode: 'DESC', limit: '10'}}/>
+                <HomepageCarouselWrapper params={{sort: 'numpurchases', sortMode: 'DESC', limit: '10'}}/>
             </div>
 
             <OurStory />

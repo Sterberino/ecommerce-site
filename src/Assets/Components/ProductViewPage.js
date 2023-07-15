@@ -9,23 +9,23 @@ import '../Hooks/useGetCards.js'
 import '../Styles/ProductViewPageStyles.css'
 import SiteHeader from "./SiteHeader.js";
 import SiteFooter from "./SiteFooter.js";
-import { ProductsContext } from "../../App.js";
 import useGetProducts from "../Hooks/useGetProducts.js";
 import Spinner from "./Spinner.js";
 import BlackMirrorSpinner from "./BlackMirrorSpinner.js";
 import useWindowSize from "../Hooks/useWindowSize.js";
 import Pagination from "./Pagination.js";
 import useGetProductCount from "../Hooks/useGetProductCount.js";
+import { useLocation } from "react-router-dom";
 
 //For sub elements controlling if the filter should be open or not. (when mobile view)
 export const filterContext = React.createContext();
-
 //Query Context, the query values for item filtering
 export const queryContext = React.createContext();
 
-
 export default function ProductViewPage() {
-  const [queryValues, setQueryValues] = React.useState({appliedQuery: {limit: 9, offset: 0}, unappliedQuery: {limit: 9, offset: 0}, requiresRefresh: true});
+  const location = useLocation();
+
+  const [queryValues, setQueryValues] = React.useState({appliedQuery: {...location.state, limit: 9, offset: 0}, unappliedQuery: {...location.state, limit: 9, offset: 0}, requiresRefresh: true});
   const[fetchingProducts, setFetchingProducts, queryParams, setQueryParams] = useGetProducts(queryValues.appliedQuery);
   const [fetchingCount, setFetchingCount, countQueryParams, setCountQueryParams, countResults] = useGetProductCount(queryValues.appliedQuery)
   
@@ -78,7 +78,7 @@ const AssignFilterState = ()=>{
     }
   }, [queryValues]);
   
-  const updatePagination = (index)=> {
+  const updatePagination = (index)=>{
     let newQuery = {
       ...queryValues
     }
@@ -103,6 +103,39 @@ const AssignFilterState = ()=>{
     )
   }
 
+  const EvaluateHeaderText = ()=>{
+    if(queryValues.appliedQuery.search)
+    {
+      return `Search: "${queryValues.appliedQuery.search}"` 
+    }
+    
+    if(queryValues.appliedQuery.sort && queryValues.appliedQuery.sortMode)
+    {
+        switch(queryValues.appliedQuery.sort)
+        {
+            case 'productprice':
+                if(queryValues.appliedQuery.sortMode === 'ASC')
+                {
+                    return 'Price (Low-High)';
+                }
+                else{
+                    return 'Price (High-Low)';
+                }
+            case 'productname':
+                return 'A-Z'
+            case 'createdat':
+                return 'Latest';
+            case 'numpurchases':
+                return 'Most Popular';
+            default:
+                return null;
+        }
+    }
+    else{
+      return 'Shop';
+    }
+}
+
 
   if(fetchingProducts || fetchingCount) 
   {
@@ -111,7 +144,7 @@ const AssignFilterState = ()=>{
     <filterContext.Provider value={{filterOpen: filterOpen, setFilterOpen : setFilterOpen}}>
       <div>
       <SiteHeader />
-      <div className='title-text' style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
+      <div className='title-text' style={{fontSize:"1.5em", marginTop: "30px"}}>{EvaluateHeaderText()}</div>
       <ProductFilterHeader/>
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}
@@ -132,7 +165,7 @@ const AssignFilterState = ()=>{
     <filterContext.Provider value={{filterOpen: filterOpen, setFilterOpen : setFilterOpen}}>
       <div>
       <SiteHeader />
-      <div className='title-text' style={{fontSize:"1.5em", marginTop: "30px"}}>{'New Arrivals'}</div>
+      <div className='title-text' style={{fontSize:"1.5em", marginTop: "30px"}}>{EvaluateHeaderText()}</div>
       <ProductFilterHeader/>
         <div className="product-viewpage-body">
           {filterOpen && <ProductFilter/>}

@@ -4,7 +4,7 @@ import '../Styles/textStyles.css'
 import '../Styles/HomepageHeroStyles.css'
 import '../Styles/SiteFooterStyles.css'
 
-export default function HomepageHero({imageUrl, title})
+export default function HomepageHero({imageUrl, title, navigationState})
 {
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export default function HomepageHero({imageUrl, title})
                 <div 
                     className="title-text"
                     onClick={()=> {
-                        navigate('/shop')
+                        navigate('/shop', {state: navigationState})
                         window.scrollTo({top: 0, left: 0, behavior: "instant"})
                     }}
                 >{"SHOP NOW"}</div>
