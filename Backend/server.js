@@ -38,15 +38,8 @@ app.use('/api/v1/cart', authenticationMiddleware, CartRouter)
 app.use('/api/v1/purchase', StripeRouter);
 app.use('/api/v1/order', authenticationMiddleware, OrderRouter)
 
-const port = process.env.SERVER_PORT || 3001;
-
-/*
-app.use(express.static(path.join(__dirname, "../public")));
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../", "public", "index.html"));
-});
-*/
 app.use(express.static(path.join(__dirname, "../build")));
+
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../", "build", "index.html"));
 });
@@ -60,6 +53,7 @@ const start = async ()=> {
         throw err;
     }
 
+    const port = process.env.PORT || 3000;
     app.listen(port, ()=>{
         console.log(`Server listening on port ${port}`)
     })
