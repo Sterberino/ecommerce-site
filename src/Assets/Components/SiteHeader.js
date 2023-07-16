@@ -28,7 +28,9 @@ export default function SiteHeader({})
     }, [cart, fetchingCart])
 
     const LoggedIn = ()=> {
-        if(localStorage.getItem('token') && user.username !== null && user.username !== undefined)
+        if(localStorage.getItem('token') 
+        && (user.username !== null && user.username !== undefined) 
+        && Boolean(user.useristempuser) === false)
         {
             return true;
         }
@@ -40,6 +42,7 @@ export default function SiteHeader({})
     const Logout = ()=> {
         localStorage.clear('token')
         setUser({});
+        navigate(0)
     }
 
     return(

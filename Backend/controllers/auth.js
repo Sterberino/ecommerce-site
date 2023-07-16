@@ -207,15 +207,15 @@ const GetCurrentUser = async(req, res)=> {
     
     try{
         const {rows} = await pool.query(
-            `SELECT * FROM users WHERE userEmail = $1`,
-            [email]
+            `SELECT * FROM users WHERE userId = $1`,
+            [userId]
         )
         let user = rows[0];
         if(!user)
         {
             return res.status(404).json({msg: 'No user found'});
         }
-        
+
         delete user.userpassword;
         return res.status(200).json(user);
     }

@@ -34,13 +34,12 @@ export default function useGetCurrentUser()
         if(localStorage.getItem('token') && (user.username === null || user.username === undefined))
         {
             fetchUser().then(res => {
-                if(Boolean(res.useristempuser) === false)
-                {
-                    let userRes = {...res};
-                    delete userRes.token;
-                    
-                    setUser(userRes);        
-                }
+                
+                let userRes = {...res};
+                delete userRes.token;
+                
+                setUser(userRes);        
+
             })
         }
     })

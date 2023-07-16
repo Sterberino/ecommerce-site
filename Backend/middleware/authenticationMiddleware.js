@@ -17,7 +17,8 @@ const Authenticate = async(req, res, next)=> {
         req.user = {
             userId: payload.userId,
             name: payload.name,
-            email: payload.email
+            email: payload.email,
+            useristempuser: payload.useristempuser
         }
         next();
     }
