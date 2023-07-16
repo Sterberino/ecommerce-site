@@ -8,36 +8,31 @@ export default function useGetCurrentUser()
 
     React.useEffect(()=> {
         const fetchUser = async()=>{
-            try {
-                const data = await fetch('../api/v1/auth/getcurrentuser', {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization" : `Bearer ${localStorage.getItem('token')}`
-                    }
-                })
-
-                const json = await data.json();
-
-                return json;
-            }
-            catch(err){
-                console.log(`${err.message}`)
+            let token = localStorage.getItem('token')
+            if(token && token !== undefined && token !== null && (user.username === null || user.username === undefined))
+            {
+                try {
+                    const data = await fetch('../api/v1/auth/getcurrentuser', {
+                        method: "GET",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "authorization" : `Bearer ${localStorage.getItem('token')}`
+                        }
+                    })
+    
+                    const json = await data.json();
+                    let userRes = {...json};
+                    delete userRes.token;
+                    setUser(userRes);
+                    return json;
+                }
+                catch(err){
+                    console.log(`${err.message}`)
+                }
             }
         }
 
-        let token = localStorage.getItem('token')
-        if(token && token !== undefined && token !== null && (user.username === null || user.username === undefined))
-        {
-            fetchUser().then(res => {
-                
-                let userRes = {...res};
-                delete userRes.token;
-                
-                setUser(userRes);        
-
-            })
-        }
+        fetchUser();
     })
 }

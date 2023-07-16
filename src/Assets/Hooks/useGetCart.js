@@ -24,7 +24,6 @@ export default function useGetCart()
                 })
                 
                 const json = await data.json();
-                console.log(JSON.stringify(json))
                 localStorage.setItem('token', json.token);  
                 
                 return json;
@@ -62,6 +61,31 @@ export default function useGetCart()
         
         }
 
+        const fetchUser = async()=>{
+            let token = localStorage.getItem('token')
+            if(token && token !== undefined && token !== null && (user.username === null || user.username === undefined))
+            {
+                try {
+                    const data = await fetch('../api/v1/auth/getcurrentuser', {
+                        method: "GET",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "authorization" : `Bearer ${localStorage.getItem('token')}`
+                        }
+                    })
+    
+                    const json = await data.json();
+                    let userRes = {...json};
+                    delete userRes.token;
+                    setUser(userRes);
+                    return json;
+                }
+                catch(err){
+                    console.log(`${err.message}`)
+                }
+            }
+        }
 
         if(fetchingCart || cart.requiresUpdate)
         {
@@ -69,17 +93,24 @@ export default function useGetCart()
             if(!localStorage.getItem('token') || localStorage.getItem('token') === undefined)
             {
                 const res = createTempUser().then((res)=> {
-                    fetchData().then(res=> {
-                        setCart({cartItems: res.payload, requiresUpdate: false})
-                        setFetchingCart(false)
-                    }).catch(err => {console.log(err)})
+                    fetchUser().then(
+                        res => {
+                            fetchData().then(res=> {
+                                setCart({cartItems: res.payload, requiresUpdate: false})
+                                setFetchingCart(false)
+                            }).catch(err => {console.log(err)})
+                        }
+                    )
                 }).catch(err => {console.log(err)})
             }
             else{
-                const res = fetchData().then(res=> {
-                    setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
-                    setFetchingCart(false)
+                fetchUser().then(res => {
+                    fetchData().then(res=> {
+                        setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
+                        setFetchingCart(false)
+                    }).catch(err => {console.log(err)})
                 }).catch(err => {console.log(err)})
+
             }
         }
     }, [fetchingCart, cart])
