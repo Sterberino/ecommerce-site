@@ -9,10 +9,10 @@ export default function ProductCart()
     const navigate = useNavigate();
     const {cart, setCart} = React.useContext(CartContext);
     
-    const [quantity, setQuantity] = React.useState(cart.cartItems.length);
+    const [quantity, setQuantity] = React.useState(cart.cartItems ? cart.cartItems.length : 0);
 
     React.useEffect(()=>{
-        setQuantity(cart.cartItems.length);        
+        setQuantity(cart.cartItems ? cart.cartItems.length : 0);        
     }, [cart])
 
     return(
