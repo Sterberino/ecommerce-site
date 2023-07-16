@@ -24,6 +24,7 @@ export default function useGetCart()
                 })
                 
                 const json = await data.json();
+                console.log(JSON.stringify(json))
                 localStorage.setItem('token', json.token);  
                 
                 return json;
