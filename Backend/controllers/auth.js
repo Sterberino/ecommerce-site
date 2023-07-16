@@ -34,8 +34,10 @@ const Login = async(req, res)=> {
 
     const token = await CreateJWT(user);
     user.token = token;
-    res.status(200).json(user);
+    
+    delete user.userpassword;
 
+    res.status(200).json(user);
 }
 
 
@@ -93,6 +95,8 @@ const Register = async(req, res)=> {
         user = result.rows[0];
         const token = await CreateJWT(user);
         user.token = token;
+        delete user.userpassword;
+
         res.status(200).json(user);
     }
     catch(err)
@@ -137,9 +141,11 @@ const CreateTempUser = async(req, res)=>{
         ) RETURNING *`,
         [userName, hashedPassword, userEmail, true])
 
-        user = result.rows[0];
+        let user = {...result.rows[0]};
         const token = await CreateJWT(user);
         user.token = token;
+        delete user.userpassword;
+
         res.status(200).json(user);
     }
     catch(err)
@@ -191,17 +197,47 @@ const CheckForUserid = async(userid) =>
     }
 }
 
+//Given a valid JWT, return the user information (for use if the user has left the page and come back)
+const GetCurrentUser = async(req, res)=> {
+    const {
+        userId,
+        name,
+        email
+    } = req.user;
+    
+    try{
+        const {rows} = await pool.query(
+            `SELECT * FROM users WHERE userEmail = $1`,
+            [email]
+        )
+        let user = rows[0];
+        if(!user)
+        {
+            return res.status(404).json({msg: 'No user found'});
+        }
+        
+        delete user.userpassword;
+        return res.status(200).json(user);
+    }
+    catch(err)
+    {
+        throw err;
+    }
+}
+
 module.exports = {
     Login,
     Register,
     CreateTempUser,
-    CheckForUserid
+    CheckForUserid, 
+    GetCurrentUser
 }
 
-const CreateJWT = async (user) => {
+const CreateJWT = async (user) => {    
     return jwt.sign({
         userId: user.userid,
-        name: user.username
+        name: user.username,
+        email: user.useremail
     },
     process.env.JWT_SECRET,
     {

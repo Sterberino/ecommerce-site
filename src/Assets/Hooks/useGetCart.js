@@ -1,13 +1,14 @@
 import React from "react";
 
 //Import cart context
-import { CartContext } from "../../App";
+import { CartContext, UserContext } from "../../App";
 
 //If we don't have a stored token, we Create a temp user, then we can fetch cart items for the user.
 export default function useGetCart()
 {
     const {cart, setCart} = React.useContext(CartContext)
-    
+    const {user, setUser} = React.useContext(UserContext);
+
     const[fetchingCart, setFetchingCart] = React.useState(true);
 
     React.useEffect(()=>{    
@@ -24,6 +25,7 @@ export default function useGetCart()
                 
                 const json = await data.json();
                 localStorage.setItem('token', json.token);  
+                
                 return json;
             }
             catch(err)
@@ -63,7 +65,7 @@ export default function useGetCart()
         if(fetchingCart || cart.requiresUpdate)
         {
             //Not logged in
-            if(localStorage.getItem('token') == null)
+            if(!localStorage.getItem('token'))
             {
                 const res = createTempUser().then((res)=> {
                     fetchData().then(res=> {

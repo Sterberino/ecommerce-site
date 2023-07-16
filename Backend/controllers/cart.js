@@ -17,7 +17,7 @@ const GetCartItems = async(req, res)=> {
 
     if(!req.user)
     {
-        throw new Error('Unauthenticated');
+        return res.status(400).json({error: 'No user in request headers.'});
     }
 
     try {
@@ -35,7 +35,7 @@ const GetCartItems = async(req, res)=> {
     }
     catch(err)
     {
-        throw err;
+        return res.status(400).json({error: err.message});
     }   
 }
 
@@ -55,7 +55,7 @@ const GetSingleCartItem = async(req, res)=> {
     }
     catch(err)
     {
-        throw err;
+        return res.status(400).json({error: err.message});
     }
 }
 
@@ -118,7 +118,7 @@ const PostCartItem = async(req, res) => {
     }
     catch(err)
     {
-        throw err;
+        return res.status(400).json({error: err.message});
     }
 }
 
@@ -161,7 +161,7 @@ const UpdateCartItem = async(req, res)=> {
     catch(err)
     {
         console.log(err.message);
-        throw err;
+        return res.status(400).json({error: err.message});
     }
 }
 
@@ -185,7 +185,7 @@ const DeleteCartItem = async(req, res)=> {
     }
     catch(err)
     {
-        throw err;
+        return res.status(400).json({error: err.message});
     }
 
 }

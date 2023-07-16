@@ -13,36 +13,7 @@ import BlackMirrorSpinner from "./BlackMirrorSpinner";
 import HomepageCarouselWrapper from "./HomepageCarouselWrapper";
 export default function Homepage()
 {
-    const[fetchingProducts, setFetchingProducts] = useGetProducts();
-    const {products, setProducts} = React.useContext(ProductsContext);
-
     window.scrollTo({top: 0, left: 0, behavior: "instant"})
-
-    React.useEffect(()=> {}, [fetchingProducts])
-
-    const carouselContents = products.products.slice(0, 10).map((current, i) => {
-        return (
-            <CarouselProductCard 
-                key = {i}
-                product = {current}
-            />
-        )
-    });
-
-    if(fetchingProducts)
-    {
-        return(
-            <div>
-                <SiteHeader />
-                <BlackMirrorSpinner style = {{
-                    width: '100%',
-                    justifyContent: 'center'
-                }}/>
-                <SiteFooter />
-            </div>
-        )
-    }
-
     return(
         <div>
             <SiteHeader />

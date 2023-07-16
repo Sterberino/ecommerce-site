@@ -3,10 +3,11 @@ import { useNavigate, Navigate, json } from "react-router-dom";
 import '../Styles/loginStyles.css'
 import '../Styles/textStyles.css'
 
+import { UserContext } from "../../App";
+
 export default function Login()
 {
     const navigate = useNavigate();
-
     const [usernameInput, setUsernameInput] = React.useState('');
     const [passwordInput, setPasswordInput] = React.useState('');
     const [emailInput, setEmailInput] = React.useState('')
@@ -27,6 +28,7 @@ export default function Login()
         initialized: false
     })
 
+    const {user, setUser} = React.useContext(UserContext);
 
     React.useEffect(()=>{
         if(registrationRequest.initialized === true && registrationRequest.password !== '' && registrationRequest.userName !== '' && registrationRequest.email !== '')
@@ -53,64 +55,108 @@ export default function Login()
                     const token = res.token;
                     if(token)
                     {
+                        let userRes = {...res};
+                        delete userRes.token;
+                        console.log(`Regiser function userRes: ${JSON.stringify( userRes)}` );
                         localStorage.setItem('token', res.token)
+                        setUser(userRes);
+                        setRegistrationRequest({
+                            userName: '',
+                            email: '',
+                            password: '',
+                            initialized: false
+                        })      
+                        
+                        return;
                     }                   
                     else{
                      console.log(JSON.stringify(res))   
-                    }
+                    }  
                 })
-                .then(res=> {
+                .finally(res=> {
+                    setRegistrationRequest({
+                        userName: '',
+                        email: '',
+                        password: '',
+                        initialized: false
+                    })
                     if(localStorage.getItem('token'))
                     {
-                        navigate(0)
-                    }          
+                        navigate('/')
+                    }         
                 })
                 .catch(err => {
                     setInputErrorMessage('\nInvalid Credentials');
+                    setRegistrationRequest({
+                        userName: '',
+                        email: '',
+                        password: '',
+                        initialized: false
+                    })
                 })
-            
-
-            setRegistrationRequest({
-                userName: '',
-                email: '',
-                password: '',
-                initialized: false
-            })
         }
-        
     }, [registrationRequest])
 
     React.useEffect(()=>{
+        const fetchLogin = async()=>{
+            try {
+                const data = await fetch('../api/v1/auth/login', {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        userEmail: loginRequest.email,
+                        userPassword: loginRequest.password
+                    })
+                })
+
+                if(data.status !== 200)
+                {
+                    throw new Error(data.status);
+                }
+                const json = await data.json();
+
+                return json;
+            }
+            catch(err){
+                throw err;
+            }
+        }
+
         if(loginRequest.initialized === true && loginRequest.password !== '' && loginRequest.email !== '')
         {
-            fetch('../api/v1/auth/login', {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: loginRequest.email,
-                    password: loginRequest.password
-                })
-            })
-            .then(res => {
-                if(res.status !== 200) { 
-                    throw new Error(res.status)
-                } 
-                return res.json()})
-            .then(res => {
+            fetchLogin()
+            .then(res=> {
                 const token = res.token;
                 if(token)
                 {
-                    localStorage.setItem('token', res.token)
-                }            
+                    localStorage.setItem('token', token)
+                    let userRes = {...res};
+                    delete userRes.token;
+                    console.log(`Login function userRes: ${JSON.stringify( userRes)}` );
+                    setUser(userRes);
+                    setRegistrationRequest({
+                        userName: '',
+                        email: '',
+                        password: '',
+                        initialized: false
+                    })      
+                    
+                    return;
+                }         
             })
-            .then(res=> {
+            .finally(res=> {   
+                setLoginRequest({
+                    password: '',
+                    email: '',
+                    initialized: false
+                })
                 if(localStorage.getItem('token'))
                 {
-                    navigate(0)
-                }          
+                    navigate('/');
+                }
             })
             .catch(err => {
                 setInputErrorMessage('\nInvalid Credentials');
@@ -153,7 +199,8 @@ export default function Login()
                     style = {{
                         marginTop: "20px",
                         marginLeft: "0",
-                        fontSize: "1.5em"
+                        fontSize: "1.5em",
+                        overflow: "visible"
                     }}
                 >{"Login"}</div>
                 <form 

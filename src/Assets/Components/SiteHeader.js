@@ -7,22 +7,40 @@ import '../Styles/textStyles.css'
 import '../Styles/SiteHeaderStyles.css'
 import '../Styles/SiteFooterStyles.css'
 
-import { CartContext } from "../../App";
+import {CartContext, UserContext} from "../../App";
 import useGetCart from "../Hooks/useGetCart";
+import useGetCurrentUser from "../Hooks/useGetCurrentUser";
 
 export default function SiteHeader({})
 {
+    const {user, setUser} = React.useContext(UserContext);
     const {cart, setCart} = React.useContext(CartContext);
     const navigate = useNavigate();
     const [fetchingCart, setFetchingCart] = useGetCart();
 
+    useGetCurrentUser();
+
     React.useEffect(()=> {
         if(cart.requiresUpdate)
         {
-            console.log('cart requires update')
             setFetchingCart(true);        
         }
     }, [cart, fetchingCart])
+
+    const LoggedIn = ()=> {
+        if(localStorage.getItem('token') && user.username !== null && user.username !== undefined)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    const Logout = ()=> {
+        localStorage.clear('token')
+        setUser({});
+    }
 
     return(
         <div>
@@ -36,7 +54,7 @@ export default function SiteHeader({})
                 />
                 <div className='title-text'>Bored Ape Escape</div>
                 <div className="cart-group">
-                    <div className="title-text" onClick={()=>{navigate('/login')}}>Sign In</div>
+                    <div className="title-text" onClick={()=>{LoggedIn() ? Logout() : navigate('/login')}}>{LoggedIn() ? "Sign Out" : "Sign In"}</div>
                     <ProductCart/>
                 </div>
             </div>

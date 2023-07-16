@@ -16,13 +16,14 @@ const Authenticate = async(req, res, next)=> {
 
         req.user = {
             userId: payload.userId,
-            name: payload.name
+            name: payload.name,
+            email: payload.email
         }
         next();
     }
     catch(err)
     {
-        throw new Error('Invalid Authentication');
+        return res.status(401).json({error: err.message});
     }
 }
 

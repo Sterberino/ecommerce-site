@@ -41,7 +41,7 @@ const GetOrders = async(req, res)=> {
     }
     catch(err)
     {
-        throw err;
+        return res.status(400).json({error: err.message});
     }   
 }
 
@@ -138,7 +138,7 @@ const CreateOrder = async(req, res)=> {
     }
     catch(err)
     {
-        throw err;
+        return res.status(400).json({error: err.message});
     }
 }
 
@@ -162,7 +162,7 @@ const DeleteOrder = async(req, res)=> {
     }
     catch(err)
     {
-        throw err;
+        return res.status(400).json({error: err.message});
     }
 
 }
