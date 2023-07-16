@@ -39,7 +39,6 @@ app.use('/api/v1/purchase', StripeRouter);
 app.use('/api/v1/order', authenticationMiddleware, OrderRouter)
 
 app.use(express.static(path.join(__dirname, "../build")));
-
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../", "build", "index.html"));
 });
@@ -47,15 +46,15 @@ app.get("*", (req, res) => {
 const start = async ()=> {
     try{
         await db.InitTables();
+    
+        const port = process.env.PORT || 3000;
+        app.listen(port, ()=>{
+            console.log(`Server listening on port ${port}`)
+        })
     }
     catch(err)
     {
-        throw err;
+        console.log(err);
     }
-
-    const port = process.env.PORT || 3000;
-    app.listen(port, ()=>{
-        console.log(`Server listening on port ${port}`)
-    })
 }
 start();
