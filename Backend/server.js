@@ -38,6 +38,8 @@ app.use('/api/v1/cart', authenticationMiddleware, CartRouter)
 app.use('/api/v1/purchase', StripeRouter);
 app.use('/api/v1/order', authenticationMiddleware, OrderRouter)
 
+const port = process.env.PORT || 3000;
+
 app.use(express.static(path.join(__dirname, "../build")));
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../", "build", "index.html"));
@@ -45,9 +47,7 @@ app.get("*", (req, res) => {
 
 const start = async ()=> {
     try{
-        await db.InitTables();
-    
-        const port = process.env.PORT || 3000;
+        await db.InitTables();    
         app.listen(port, ()=>{
             console.log(`Server listening on port ${port}`)
         })
