@@ -1,4 +1,5 @@
 require('dotenv').config();
+const {StatusCodes} = require('http-status-codes')
 
 const Pool = require('pg').Pool
 const pool = new Pool({
@@ -146,7 +147,7 @@ const GetProductById = async (req, res)=>{
         res.status(200).json(results.rows[0]);
     }
     catch(err){
-        throw err;
+        return res.status(400).json({msg: 'Something went wrong.'});
     }
 }
 
@@ -199,7 +200,7 @@ const CreateProduct = async (req, res)=> {
     catch(err)
     {
         console.log(err);
-        throw err;
+        return res.status(400).json({msg: 'Something went wrong.'});
     }
 }
 
@@ -249,7 +250,7 @@ const UpdateProduct = async (req, res)=> {
     catch(err)
     {
         console.log(err);
-        throw err;
+        return res.status(400).json({msg: 'Something went wrong.'});
     }
 }
 
@@ -262,7 +263,7 @@ const DeleteProduct = async (req, res) => {
     catch(err)
     {
         console.log(err);
-        throw err;
+        return res.status(400).json({msg: 'Something went wrong.'});
     }
 }
 

@@ -57,7 +57,7 @@ export default function SiteHeader({})
                 />
                 <div className='title-text'>Bored Ape Escape</div>
                 <div className="cart-group">
-                    <div className="title-text" onClick={()=>{LoggedIn() ? Logout() : navigate('/login')}}>{LoggedIn() ? "Sign Out" : "Sign In"}</div>
+                    <div className="title-text" onClick={()=>{navigate('/login')}}>{LoggedIn() ? "Sign Out" : "Sign In"}</div>
                     <ProductCart/>
                 </div>
             </div>

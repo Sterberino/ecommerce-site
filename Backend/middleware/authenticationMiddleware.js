@@ -6,6 +6,7 @@ const Authenticate = async(req, res, next)=> {
 
     if(!authHeader || !authHeader.startsWith('Bearer '))
     {
+        console.log(`Invalid Authentication issue: ${authHeader}`)
         throw new Error('Invalid Authentication');
     }
 
@@ -24,6 +25,7 @@ const Authenticate = async(req, res, next)=> {
     }
     catch(err)
     {
+        console.log(`Invalid Authentication issue: ${err}`)
         return res.status(401).json({error: err.message});
     }
 }

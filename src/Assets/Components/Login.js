@@ -3,7 +3,7 @@ import { useNavigate, Navigate, json } from "react-router-dom";
 import '../Styles/loginStyles.css'
 import '../Styles/textStyles.css'
 
-import { UserContext } from "../../App";
+import { UserContext, CartContext } from "../../App";
 
 export default function Login()
 {
@@ -28,6 +28,7 @@ export default function Login()
         initialized: false
     })
 
+    const {cart, setCart} = React.useContext(CartContext)
     const {user, setUser} = React.useContext(UserContext);
 
     React.useEffect(()=>{
@@ -37,7 +38,8 @@ export default function Login()
                 method: "POST",
                 mode: "cors",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "authorization" : `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     userName: registrationRequest.userName,
@@ -80,8 +82,13 @@ export default function Login()
                         password: '',
                         initialized: false
                     })
+
                     if(localStorage.getItem('token'))
                     {
+                        let newCart = {...cart};
+                        newCart.requiresUpdate = true;
+                        setCart(newCart);
+
                         navigate('/')
                     }         
                 })
@@ -104,7 +111,8 @@ export default function Login()
                     method: "POST",
                     mode: "cors",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "authorization" : `Bearer ${localStorage.getItem('token')}`
                     },
                     body: JSON.stringify({
                         userEmail: loginRequest.email,
@@ -135,7 +143,6 @@ export default function Login()
                     localStorage.setItem('token', token)
                     let userRes = {...res};
                     delete userRes.token;
-                    console.log(`Login function userRes: ${JSON.stringify( userRes)}` );
                     setUser(userRes);
                     setRegistrationRequest({
                         userName: '',
@@ -143,7 +150,6 @@ export default function Login()
                         password: '',
                         initialized: false
                     })      
-                    
                     return;
                 }         
             })
@@ -153,8 +159,13 @@ export default function Login()
                     email: '',
                     initialized: false
                 })
+
                 if(localStorage.getItem('token'))
                 {
+                    let newCart = {...cart};
+                    newCart.requiresUpdate = true;
+                    setCart(newCart);
+
                     navigate('/');
                 }
             })

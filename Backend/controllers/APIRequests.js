@@ -1,7 +1,8 @@
 const express = require('express')
 const request = require('request')
 const jwt = require('jsonwebtoken');
-//const {StatusCodes} = require('http-status-codes')
+const {StatusCodes} = require('http-status-codes')
+
 require('dotenv').config();
 const {CheckForUserid} = require('./auth')
 
@@ -35,7 +36,7 @@ const StripePurchase = async (req, res)=>{
         const authHeader = req.headers.authorization;
         if(!authHeader || !authHeader.startsWith('Bearer '))
         {
-            throw new Error('Invalid Authentication');
+            return res.status(StatusCodes.UNAUTHORIZED).json({msg : 'Invalid Authentication'});
         }
 
         const token = authHeader.split(' ')[1];
@@ -125,7 +126,7 @@ const ProcessSuccessfulPayment = async(event)=> {
     }
     catch(err)
     {
-        throw err;
+        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
     }   
 }
 
@@ -165,7 +166,7 @@ const CreateOrder = async(userId, cartItems)=> {
     }
     catch(err)
     {
-        throw err;
+        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
     }
 }
 

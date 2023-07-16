@@ -18,16 +18,12 @@ export default function useGetCurrentUser()
                     }
                 })
 
-                if(data.status !== 200)
-                {
-                    throw new Error(data.status);
-                }
                 const json = await data.json();
 
                 return json;
             }
             catch(err){
-                throw err;
+                console.log(`${err.message}`)
             }
         }
 

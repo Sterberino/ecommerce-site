@@ -18,12 +18,12 @@ const Login = async(req, res)=> {
 
     if(!userEmail || !userPassword)
     {
-        throw new Error('Please provide an email and password');
+        return res.status(StatusCodes.BAD_REQUEST).json({msg: 'Please provide an email and password'});
     }
     const user = await CheckForEmail(userEmail);
     if(!user)
     {
-        throw new Error(`No user found with email ${userEmail}`);
+        return res.status(StatusCodes.BAD_REQUEST).json({msg: `No user found with email ${userEmail}`});
     }
 
     const match = await bcrypt.compare(userPassword, user.userpassword);
@@ -36,6 +36,8 @@ const Login = async(req, res)=> {
     user.token = token;
     
     delete user.userpassword;
+
+    await TransferAllCartItems(req.user, user);
 
     res.status(200).json(user);
 }
@@ -96,14 +98,111 @@ const Register = async(req, res)=> {
         const token = await CreateJWT(user);
         user.token = token;
         delete user.userpassword;
-
+        
+        await TransferAllCartItems(req.user, user);
         res.status(200).json(user);
     }
     catch(err)
     {
-        throw err;
+        return res.status(StatusCodes.BAD_REQUEST).json({msg: `Something went wrong.`});
     }    
 }
+
+const TransferAllCartItems = async(tempUser, permenentUser)=>
+{
+    const {
+        userId,
+        name
+    } = tempUser;
+
+    if(!userId || !permenentUser.userid)
+    {
+        return;
+    }
+
+    try {
+        const items = await pool.query(
+            `SELECT * FROM "cartItems"
+            RIGHT JOIN products
+                ON productId = cartProductId
+            WHERE cartUserId = $1 AND orderCompleted = $2`, 
+            [userId, false]);
+
+        for(let i = 0; i < items.rows.length; i++)
+        {
+            await TransferSingleCartItem(permenentUser.userid, items.rows[i])
+        }
+    }
+    catch(err)
+    {
+        console.log(err);
+        return;
+    }   
+
+}
+
+const TransferSingleCartItem = async(toUserId, cartItem) => {
+    const {
+        cartproductid,
+        cartquantity
+    } = cartItem;
+
+    const userId = toUserId;
+
+    try{
+        const checkResult = await pool.query(
+            `SELECT * FROM "cartItems"
+            RIGHT JOIN products
+                ON productId = cartProductId
+            WHERE cartProductId = $1 AND cartUserId = $2 AND ordercompleted = $3`,
+            [cartproductid, userId, false]
+        )
+        
+        //This means an entry with the product exists. If this is the case we want to update the quantity
+        if(checkResult.rowCount > 0)
+        {
+            const results = await pool.query(
+                `UPDATE "cartItems" SET
+                    cartQuantity = $1
+                WHERE cartEntryId = $2 AND cartUserId = $3
+                RETURNING *`,
+                [
+                    cartquantity + checkResult.rows[0].cartquantity,
+                    checkResult.rows[0].cartentryid,
+                    userId
+                ]
+            );
+            return;
+        }
+        else{
+            const results = await pool.query(
+                `INSERT into "cartItems" (
+                    cartProductId,
+                    cartUserId,
+                    cartQuantity
+                )
+                VALUES (
+                    $1,
+                    $2,
+                    $3
+                )
+                RETURNING *`,
+                [
+                    cartproductid,
+                    userId,
+                    cartquantity
+                ]
+            );
+            return;
+        }
+    }
+    catch(err)
+    {
+        return;
+    }
+}
+
+
 
 const CreateTempUser = async(req, res)=>{
     const tempBody = {
@@ -120,7 +219,7 @@ const CreateTempUser = async(req, res)=>{
 
     if(!userEmail || !userName || !userPassword)
     {
-        throw new Error("Something went wrong.");
+        return res.status(StatusCodes.BAD_REQUEST).json({msg: 'Please provide a username, password, and email.'})
     }
 
     //Generate the salt and hash the password before storing
@@ -150,7 +249,7 @@ const CreateTempUser = async(req, res)=>{
     }
     catch(err)
     {
-        throw err;
+        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
     }    
 }
 
@@ -172,7 +271,7 @@ const CheckForEmail = async(email) =>
     }
     catch(err)
     {
-        throw err;
+        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
     }
 }
 
@@ -193,7 +292,7 @@ const CheckForUserid = async(userid) =>
     }
     catch(err)
     {
-        throw err;
+        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
     }
 }
 
@@ -221,7 +320,7 @@ const GetCurrentUser = async(req, res)=> {
     }
     catch(err)
     {
-        throw err;
+        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
     }
 }
 

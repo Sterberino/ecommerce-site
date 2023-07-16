@@ -1,5 +1,6 @@
 import React from "react";
 import '../Styles/SiteFooterStyles.css'
+import '../Styles/CardAnimation.css'
 import { useNavigate } from "react-router-dom";
 
 export default function SiteFooter()
@@ -41,7 +42,32 @@ export default function SiteFooter()
                 <div className="footer-column">
                     <div className="title-text" style={{textAlign: 'center'}}>{"CONNECT WITH US"}</div>
                     <div className="footer-column-bar"></div>
-                    
+                    <div 
+                        className="simple-row"
+                        style = {{justifyContent: 'center',height: '35px'}}
+                    >
+                        <img 
+                            src= {`${process.env.PUBLIC_URL}/Images/linkedin-icon.png`} 
+                            className="contained-image" 
+                            onClick={()=>{
+                                window.open('https://www.linkedin.com/in/zachary-ruiz-890358231/', '_blank');
+                            }}
+                        />
+                        <img 
+                            src= {`${process.env.PUBLIC_URL}/Images/github-icon.png`} 
+                            className="contained-image"
+                            onClick={()=>{
+                                window.open('https://github.com/Sterberino', '_blank');
+                            }} 
+                        />
+                        <img 
+                            src= {`${process.env.PUBLIC_URL}/Images/z-icon.png`} 
+                            className="contained-image" 
+                            onClick={()=>{
+                                window.open('https://sterberino.github.io/', '_blank');
+                            }}
+                        />
+                    </div>
                 </div>
 
             </div>

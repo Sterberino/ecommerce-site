@@ -46,8 +46,37 @@ export default function ContactUsPage()
                             <div className="title-text">{"MON-FRI 9:00-8:00"}</div>
                             <div className="title-text">{"SAT 10:00-7:00"}</div>
                             <div className="title-text">{"SUN 10:00-6:00"}</div>
+                        
+                            <div 
+                        className="simple-row"
+                        style = {{marginTop: '60px',justifyContent: 'center', height: '35px', width: '192px', left: 'calc(50% - 96px)'}}
+                    >
+                        <img 
+                            src= {`${process.env.PUBLIC_URL}/Images/linkedin-icon.png`} 
+                            className="contained-image" 
+                            onClick={()=>{
+                                window.open('https://www.linkedin.com/in/zachary-ruiz-890358231/', '_blank');
+                            }}
+                        />
+                        <img 
+                            src= {`${process.env.PUBLIC_URL}/Images/github-icon.png`} 
+                            className="contained-image"
+                            onClick={()=>{
+                                window.open('https://github.com/Sterberino', '_blank');
+                            }} 
+                        />
+                        <img 
+                            src= {`${process.env.PUBLIC_URL}/Images/z-icon.png`} 
+                            className="contained-image" 
+                            onClick={()=>{
+                                window.open('https://sterberino.github.io/', '_blank');
+                            }}
+                        />
+                    </div>
                         </div>
                         <img src = {`${process.env.PUBLIC_URL}/Images/UCRMapsScreenshot.png`}></img>
+                    
+                        
                     </div>
                     
                     

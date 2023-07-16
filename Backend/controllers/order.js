@@ -1,4 +1,5 @@
 require('dotenv').config();
+const {StatusCodes} = require('http-status-codes')
 
 const Pool = require('pg').Pool
 const pool = new Pool({
@@ -19,7 +20,7 @@ const GetOrders = async(req, res)=> {
 
     if(!req.user)
     {
-        throw new Error('Unauthenticated');
+        return res.status(StatusCodes.UNAUTHORIZED).json({msg: 'Something went wrong.'});
     }
 
     try {
