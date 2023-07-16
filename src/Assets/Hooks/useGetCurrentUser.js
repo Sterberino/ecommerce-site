@@ -27,7 +27,8 @@ export default function useGetCurrentUser()
             }
         }
 
-        if(localStorage.getItem('token') && localStorage.getItem('token') !== undefined && (user.username === null || user.username === undefined))
+        let token = localStorage.getItem('token')
+        if(token && token !== undefined && token !== null && (user.username === null || user.username === undefined))
         {
             fetchUser().then(res => {
                 
