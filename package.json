@@ -20,18 +20,16 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "request": "^2.88.2",
-    "server": "^1.0.38",
     "stripe": "^12.7.0",
     "web-vitals": "^2.1.4",
     "xss-clean": "^0.1.4"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "node backend/server.js ",
+    "dev": "(react-scripts start) | (nodemon Backend/server.js)",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
