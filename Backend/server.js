@@ -2,11 +2,27 @@ const db = require('./db/initTable.js')
 require('dotenv').config();
 const path = require('node:path')
 const express= require('express');
+
+const xss = require('xss-clean');
+const helmet = require('helmet');
 const cors = require('cors');
+const rateLimiter = require('express-rate-limit')
+
 const authenticationMiddleware = require('./middleware/authenticationMiddleware.js')
 const app = express();
 app.use(express.json())
+
+app.use(xss());
 app.use(cors())
+app.use(helmet());
+app.set('trust proxy', 1);
+app.use(
+  rateLimiter({
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 5000, // limit each IP to 100 requests per windowMs
+  })
+);
+
 
 //Import routers
 const ProductsRouter = require('./routers/productQueries.js');
@@ -22,16 +38,18 @@ app.use('/api/v1/cart', authenticationMiddleware, CartRouter)
 app.use('/api/v1/purchase', StripeRouter);
 app.use('/api/v1/order', authenticationMiddleware, OrderRouter)
 
+const port = process.env.SERVER_PORT || 3001;
+
 /*
 app.use(express.static(path.join(__dirname, "../public")));
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../", "public", "index.html"));
 });
 */
-
-
-
-const port = process.env.SERVER_PORT || 3001;
+app.use(express.static(path.join(__dirname, "../build")));
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../", "build", "index.html"));
+});
 
 const start = async ()=> {
     try{
