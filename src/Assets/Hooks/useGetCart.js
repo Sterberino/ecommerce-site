@@ -26,6 +26,9 @@ export default function useGetCart()
                 const json = await data.json();
                 localStorage.setItem('token', json.token);  
                 
+                let newUser = {...json};
+                delete newUser.token;
+                setUser(newUser);
                 return json;
             }
             catch(err)
