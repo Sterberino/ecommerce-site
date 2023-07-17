@@ -25,7 +25,7 @@ export default function useGetCart()
                 
                 const json = await data.json();
                 console.log(JSON.stringify(json));
-                
+
 
                 localStorage.setItem('token', json.token);  
                 
@@ -69,7 +69,7 @@ export default function useGetCart()
 
         const fetchUser = async()=>{
             let token = localStorage.getItem('token')
-            if(token && token !== undefined && token !== null && (user.username === null || user.username === undefined))
+            if(token && token !== undefined && token !== 'undefined' && token !== null && (user.username === null || user.username === undefined))
             {
                 try {
                     const data = await fetch('../api/v1/auth/getcurrentuser', {
@@ -96,7 +96,7 @@ export default function useGetCart()
         if(fetchingCart || cart.requiresUpdate)
         {
             //Not logged in
-            if(!localStorage.getItem('token') || localStorage.getItem('token') === undefined)
+            if(!localStorage.getItem('token') || localStorage.getItem('token') === undefined || token === 'undefined')
             {
                 const res = createTempUser().then((res)=> {    
                     fetchData().then(res=> {
