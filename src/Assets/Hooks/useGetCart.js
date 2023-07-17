@@ -95,25 +95,18 @@ export default function useGetCart()
             //Not logged in
             if(!localStorage.getItem('token') || localStorage.getItem('token') === undefined)
             {
-                const res = createTempUser().then((res)=> {
-                    fetchUser().then(
-                        res => {
-                            fetchData().then(res=> {
-                                setCart({cartItems: res.payload, requiresUpdate: false})
-                                setFetchingCart(false)
-                            }).catch(err => {console.log(err)})
-                        }
-                    )
-                }).catch(err => {console.log(err)})
-            }
-            else{
-                fetchUser().then(res => {
+                const res = createTempUser().then((res)=> {    
                     fetchData().then(res=> {
-                        setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
+                        setCart({cartItems: res.payload, requiresUpdate: false})
                         setFetchingCart(false)
                     }).catch(err => {console.log(err)})
                 }).catch(err => {console.log(err)})
-
+            }
+            else{
+                fetchData().then(res=> {
+                    setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
+                    setFetchingCart(false)
+                }).catch(err => {console.log(err)})
             }
         }
     }, [fetchingCart, cart])

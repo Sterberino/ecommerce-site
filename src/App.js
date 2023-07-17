@@ -28,6 +28,8 @@ function App() {
   const [orders, setOrders] = React.useState({orders: [], requiresUpdate: true});
   const[user, setUser] = React.useState({});
 
+  console.log(`User at app level: ${JSON.stringify(user)}`)
+
   return (
     <UserContext.Provider value = {{user: user, setUser : setUser}}>
     <CartContext.Provider value={{cart: cart, setCart : setCart}} >
