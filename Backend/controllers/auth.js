@@ -251,7 +251,6 @@ const CreateTempUser = async(req, res)=>{
     {
         res.status(400).json({
             msg: err.message,
-            functionSource: "CreateTempUser",
         });
     }    
 }
@@ -323,7 +322,7 @@ const GetCurrentUser = async(req, res)=> {
     }
     catch(err)
     {
-        res.status(400).json({msg: err.message, functionSource: "GetCurrentUser"});
+        res.status(400).json({msg: err.message});
     }
 }
 
