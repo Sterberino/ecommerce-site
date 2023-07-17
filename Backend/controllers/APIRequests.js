@@ -126,7 +126,7 @@ const ProcessSuccessfulPayment = async(event)=> {
     }
     catch(err)
     {
-        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
+        res.status(400).json(res.status(400).json({err: err.message}));
     }   
 }
 
@@ -166,7 +166,7 @@ const CreateOrder = async(userId, cartItems)=> {
     }
     catch(err)
     {
-        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
+        res.status(400).json(res.status(400).json({err: err.message}));
     }
 }
 

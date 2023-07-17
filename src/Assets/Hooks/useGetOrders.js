@@ -21,6 +21,7 @@ export default function useGetOrders()
                     
                 })
                 const json = await data.json();
+                console.log(JSON.stringify(json))
                 return json;
             }
             catch(err)
