@@ -4,8 +4,11 @@ This is an ecommerce site I made as a learning project. It uses PostgreSQL, Expr
 Features Include: 
 
 -Filtering and Sorting products
+
 -Pagination
+
 -Checkout
+
 -Login and Registering user accounts
 
 Stripe API Webhook empties the user cart and transfers items to an order entry upon sucessful payment.
