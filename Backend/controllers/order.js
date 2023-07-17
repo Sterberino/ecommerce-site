@@ -25,13 +25,13 @@ const GetOrders = async(req, res)=> {
 
     try {
         let items = await pool.query(
-            `SELECT * FROM "orders"
+            `SELECT * FROM "orders" a
             RIGHT JOIN "cartItems"
                 ON cartEntryId = ANY(orderCartItemIds)
                 RIGHT JOIN products
                     ON productId = cartProductId
             WHERE orderUserId = $1
-            ORDER BY createdAt DESC`, 
+            ORDER BY a.createdAt DESC`, 
             [userId]);
         let arr = items.rows.map(item=> mapOrder(item))
         let result = eliminateDuplicates(arr);
