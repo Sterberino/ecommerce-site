@@ -38,7 +38,7 @@ app.use('/api/v1/cart', authenticationMiddleware, CartRouter)
 app.use('/api/v1/purchase', StripeRouter);
 app.use('/api/v1/order', authenticationMiddleware, OrderRouter)
 
-const port = process.env.PORT || 3000;
+const port = Number(process.env.PORT) || 3000;
 
 app.use(express.static(path.join(__dirname, "../build")));
 app.get("*", (req, res) => {
