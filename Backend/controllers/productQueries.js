@@ -7,7 +7,7 @@ const pool = new Pool({
     host: process.env.PG_HOST,
     database: process.env.PG_DATABASE,
     password: process.env.PG_PASSWORD,
-    port: process.env.PG_PORT
+    port: Number(process.env.PG_PORT)
 })
 
 const GetProductsCount = async(req, res) => {
