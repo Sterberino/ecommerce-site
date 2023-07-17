@@ -96,7 +96,8 @@ export default function useGetCart()
         if(fetchingCart || cart.requiresUpdate)
         {
             //Not logged in
-            if(!localStorage.getItem('token') || localStorage.getItem('token') === undefined || token === 'undefined')
+            let token = localStorage.getItem('token')
+            if(!token || token === undefined || token === 'undefined')
             {
                 const res = createTempUser().then((res)=> {    
                     fetchData().then(res=> {
