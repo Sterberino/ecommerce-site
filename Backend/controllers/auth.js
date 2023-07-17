@@ -244,7 +244,7 @@ const CreateTempUser = async(req, res)=>{
         const token = await CreateJWT(user);
         user.token = token;
         delete user.userpassword;
-
+        
         res.status(200).json(user);
     }
     catch(err)
@@ -332,7 +332,7 @@ module.exports = {
     GetCurrentUser
 }
 
-const CreateJWT = async (user) => {    
+const CreateJWT = async (user) => {        
     return jwt.sign({
         userId: user.userid,
         name: user.username,
