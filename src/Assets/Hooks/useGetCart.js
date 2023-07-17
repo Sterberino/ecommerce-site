@@ -103,10 +103,21 @@ export default function useGetCart()
                 }).catch(err => {console.log(err)})
             }
             else{
-                fetchData().then(res=> {
-                    setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
-                    setFetchingCart(false)
-                }).catch(err => {console.log(err)})
+                if(user.userid === null || user.userid === undefined || user.username === null || user.username === undefined)
+                {
+                    fetchUser().then(res => {
+                        fetchData().then(res=> {
+                            setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
+                            setFetchingCart(false)
+                        }).catch(err => {console.log(err)})
+                    })
+                }
+                else{
+                    fetchData().then(res=> {
+                        setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
+                        setFetchingCart(false)
+                    }).catch(err => {console.log(err)})
+                }
             }
         }
     }, [fetchingCart, cart])

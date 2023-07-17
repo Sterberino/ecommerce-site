@@ -9,7 +9,6 @@ import '../Styles/SiteFooterStyles.css'
 
 import {CartContext, UserContext} from "../../App";
 import useGetCart from "../Hooks/useGetCart";
-import useGetCurrentUser from "../Hooks/useGetCurrentUser";
 
 export default function SiteHeader({})
 {
@@ -18,7 +17,6 @@ export default function SiteHeader({})
     const navigate = useNavigate();
     const [fetchingCart, setFetchingCart] = useGetCart();
 
-    useGetCurrentUser();
 
     React.useEffect(()=> {
         if(cart.requiresUpdate)
@@ -37,12 +35,6 @@ export default function SiteHeader({})
         else{
             return false;
         }
-    }
-
-    const Logout = ()=> {
-        localStorage.clear('token')
-        setUser({});
-        navigate(0)
     }
 
     return(
