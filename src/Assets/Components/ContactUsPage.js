@@ -52,6 +52,7 @@ export default function ContactUsPage()
                         style = {{marginTop: '60px',justifyContent: 'center', height: '35px', width: '192px', left: 'calc(50% - 96px)'}}
                     >
                         <img 
+                            style = {{height: '60px !important', maxHeight: '60px !important', minHeight: '60px !important'}}
                             src= {`${process.env.PUBLIC_URL}/Images/linkedin-icon.png`} 
                             className="contained-image" 
                             onClick={()=>{
@@ -59,6 +60,7 @@ export default function ContactUsPage()
                             }}
                         />
                         <img 
+                            style = {{height: '60px !important', maxHeight: '60px !important', minHeight: '60px !important'}}
                             src= {`${process.env.PUBLIC_URL}/Images/github-icon.png`} 
                             className="contained-image"
                             onClick={()=>{
@@ -66,6 +68,7 @@ export default function ContactUsPage()
                             }} 
                         />
                         <img 
+                            style = {{height: '60px !important', maxHeight: '60px !important', minHeight: '60px !important'}}
                             src= {`${process.env.PUBLIC_URL}/Images/z-icon.png`} 
                             className="contained-image" 
                             onClick={()=>{
