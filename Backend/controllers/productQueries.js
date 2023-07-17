@@ -99,7 +99,7 @@ const GetProducts = async (req, res) => {
     catch(err)
     {
         console.log(err);
-        res.status(500).send('something went wrong');
+        res.status(400).json({msg: err.message});
     }
 }
 
@@ -147,7 +147,7 @@ const GetProductById = async (req, res)=>{
         res.status(200).json(results.rows[0]);
     }
     catch(err){
-        return res.status(400).json({msg: 'Something went wrong.'});
+        res.status(400).json({msg: err.message});
     }
 }
 
@@ -200,7 +200,7 @@ const CreateProduct = async (req, res)=> {
     catch(err)
     {
         console.log(err);
-        return res.status(400).json({msg: 'Something went wrong.'});
+        res.status(400).json({msg: err.message});
     }
 }
 
@@ -250,7 +250,7 @@ const UpdateProduct = async (req, res)=> {
     catch(err)
     {
         console.log(err);
-        return res.status(400).json({msg: 'Something went wrong.'});
+        res.status(400).json({msg: err.message});
     }
 }
 
@@ -263,7 +263,7 @@ const DeleteProduct = async (req, res) => {
     catch(err)
     {
         console.log(err);
-        return res.status(400).json({msg: 'Something went wrong.'});
+        res.status(400).json({msg: err.message});
     }
 }
 

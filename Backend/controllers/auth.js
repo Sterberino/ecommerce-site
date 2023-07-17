@@ -104,7 +104,7 @@ const Register = async(req, res)=> {
     }
     catch(err)
     {
-        return res.status(StatusCodes.BAD_REQUEST).json({msg: `Something went wrong.`});
+        res.status(400).json({msg: err.message});
     }    
 }
 
@@ -249,7 +249,7 @@ const CreateTempUser = async(req, res)=>{
     }
     catch(err)
     {
-        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
+        res.status(400).json({msg: err.message});
     }    
 }
 
@@ -271,7 +271,7 @@ const CheckForEmail = async(email) =>
     }
     catch(err)
     {
-        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
+        res.status(400).json({msg: err.message});
     }
 }
 
@@ -292,7 +292,7 @@ const CheckForUserid = async(userid) =>
     }
     catch(err)
     {
-        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
+        res.status(400).json({msg: err.message});
     }
 }
 
@@ -320,7 +320,7 @@ const GetCurrentUser = async(req, res)=> {
     }
     catch(err)
     {
-        res.status(400).json(res.status(400).json({msg: 'Something went wrong.'}));
+        res.status(400).json({msg: err.message});
     }
 }
 
