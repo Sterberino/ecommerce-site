@@ -7,6 +7,9 @@
     width: 70%;
     left: 15%;
     margin-top: 50px;
+
+    padding-top: 5vh;
+    padding-bottom: 5vh;
 }
 
 /*We will use 2-column structure. Right column will just be an image*/

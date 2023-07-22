@@ -11,7 +11,6 @@ export default function OurStory()
         
     return(
         <div>
-            <div className="footer-divider-bar" style = {{width: "80%"}}></div>
 
             <div className="our-story">
                 <div className="our-story-left">

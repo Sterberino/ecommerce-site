@@ -1,3 +1,12 @@
+:root {
+  --darkest-body: rgba(17,18,20, 1);
+  --darker-body: rgba(30,31,34,1);
+  --mid-body: rgba(43,45,49,1);
+  --lighter-body: rgba(49,51,56,1);
+  --lightest-body: rgba(56,58, 64, 1);
+  --main-blue: rgba(88, 101, 242, 1);
+}
+
 .search-bar{
     position: relative;
     display: flex;
@@ -17,7 +26,7 @@
     left: 0px;
     
     border: 1px solid rgba(190,190,190,0.5);
-    background-color: rgba(0,0,0,0.4);
+    background-color: var(--darker-body);
     color: rgba(190,190,190, 1);
     text-align: left;
     transition: color 0.25s ease-in-out,

@@ -4,6 +4,9 @@
     position: relative;
     margin-bottom: 50px;
     margin-top: 30px;
+
+    padding-bottom: 10vh;
+    padding-top: 10vh;
 }
 
 .homepage-hero img{
@@ -39,7 +42,7 @@
 .homepage-hero-title > .title-text:nth-child(2)
 {
     cursor: pointer;
-    text-decoration: underline;animation-name: pulse;
+    text-decoration: underline;
     animation-timing-function: ease-in-out;
     animation-duration: 2s;
     animation-iteration-count: infinite;

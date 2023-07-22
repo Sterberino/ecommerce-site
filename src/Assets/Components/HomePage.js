@@ -11,6 +11,8 @@ import { ProductsContext } from "../../App";
 import Spinner from "./Spinner";
 import BlackMirrorSpinner from "./BlackMirrorSpinner";
 import HomepageCarouselWrapper from "./HomepageCarouselWrapper";
+import '../Styles/BackgroundBlock.css';
+
 export default function Homepage()
 {
     window.scrollTo({top: 0, left: 0, behavior: "instant"})
@@ -23,7 +25,7 @@ export default function Homepage()
                 title={"Brand New Brands"}
                 navigationState = {{sort: 'createdat', sortMode: 'DESC'}}
             />
-            <div>
+            <div className="background-block">
                 <div 
                     className="title-text"
                     style = {{
@@ -39,7 +41,7 @@ export default function Homepage()
                 navigationState = {{sort: 'numpurchases', sortMode: 'DESC'}}
             />
 
-            <div>
+            <div className="background-block">
                 <div 
                     className="title-text"
                     style = {{

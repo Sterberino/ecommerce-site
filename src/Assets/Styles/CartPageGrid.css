@@ -12,6 +12,8 @@
     
     gap: 0px;
 
+    padding-top: 20vh;
+
     box-sizing: border-box;
     min-height: max-content;
 }

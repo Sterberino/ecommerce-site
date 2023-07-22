@@ -1,11 +1,17 @@
-.App {
-  text-align: center;
+:root {
+  --darkest-body: rgba(17,18,20, 1);
+  --darker-body: rgba(30,31,34,1);
+  --mid-body: rgba(43,45,49,1);
+  --lighter-body: rgba(49,51,56,1);
+  --lightest-body: rgba(56,58, 64, 1);
+  --main-blue: rgba(88, 101, 242, 1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+body{
+  background: var(--mid-body);
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

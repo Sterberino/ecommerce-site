@@ -67,6 +67,7 @@ export default function HomepageCarouselWrapper({params})
         />
     }
     else{
+        
         return <Carousel carouselContents = {GetCarouselContents()}/>
     }
 }

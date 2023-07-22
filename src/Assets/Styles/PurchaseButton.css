@@ -1,10 +1,20 @@
+:root {
+    --darkest-body: rgba(17,18,20, 1);
+    --darker-body: rgba(30,31,34,1);
+    --mid-body: rgba(43,45,49,1);
+    --lighter-body: rgba(49,51,56,1);
+    --lightest-body: rgba(56,58, 64, 1);
+    --main-blue: rgba(88, 101, 242, 1);
+  }
+
+
 .purchase-button{
     position: absolute;
     height: 50px;
     width: 100%;
     right: 0px;
     left: 0px;
-    background-color: rgba(63, 162, 79, 1);
+    background-color: var(--main-blue);
     bottom: -55px;
 
     display: flex;

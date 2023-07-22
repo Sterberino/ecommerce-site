@@ -1,3 +1,12 @@
+:root {
+    --darkest-body: rgba(17,18,20, 1);
+    --darker-body: rgba(30,31,34,1);
+    --mid-body: rgba(43,45,49,1);
+    --lighter-body: rgba(49,51,56,1);
+    --lightest-body: rgba(56,58, 64, 1);
+    --main-blue: rgba(88, 101, 242, 1);
+  }
+
 .footer-items-row{
     position: relative;
     display: flex;
@@ -5,14 +14,14 @@
     flex-direction: row;
     align-items: start;
     justify-content: center;
-    margin-top: 20px;
+
 }
 
 .footer-column
 {
     position: relative;
     display: flex;
-    width: 150px;
+    width: 180px;
     flex-direction: column;
     align-items: center;
     justify-content: left;
@@ -54,7 +63,15 @@ padding-right: 10px;
 .site-footer{
     width: 100%;
     height: min-content;
-    margin-bottom: 30px;
+
+    margin-top: 30px;
+
+    background-color: var(--darker-body);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-top: 1px solid rgba(110, 110,  110, 1);
+
+    box-shadow: 0px -2px 5px var(--darkest-body);
 }
 
 @media only screen and (max-width: 640px) {

@@ -24,7 +24,6 @@ export default function HomepageHero({imageUrl, title, navigationState})
                     }}
                 >{"SHOP NOW"}</div>
             </div>
-            <div className="footer-divider-bar"></div>
         </div>
     )
 

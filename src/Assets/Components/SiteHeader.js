@@ -53,7 +53,7 @@ export default function SiteHeader({})
                     <ProductCart/>
                 </div>
             </div>
-            <div className="footer-divider-bar"></div>
+            
             <div className="navigation-menu">
                 <div className="navigation-menu-item">
                     <div 
@@ -87,7 +87,7 @@ export default function SiteHeader({})
                     >{"Contact"}</div>
                 </div>
             </div>
-            <div className="footer-divider-bar"></div>
+     
         </div>
     )
 }

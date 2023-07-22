@@ -9,10 +9,9 @@ export default function SiteFooter()
 
     return(
         <div className="site-footer">
-            <div className="footer-divider-bar"></div>
             <div className="footer-items-row">
                 <div className="footer-column">
-                    <div className="title-text" style={{textAlign: 'center'}}>{"CUSTOMER SERVICE"}</div>
+                    <div className="title-text" style={{textAlign: 'center', fontSize: "0.9em"}}>{"CUSTOMER SERVICE"}</div>
                     <div className="footer-column-bar"></div>
                     <div 
                         className="title-text"
@@ -27,7 +26,7 @@ export default function SiteFooter()
                 </div>
 
                 <div className="footer-column">
-                    <div className="title-text" style={{textAlign: 'center'}}>{"VISIT OUR STORE"}</div>
+                    <div className="title-text" style={{textAlign: 'center', fontSize: "0.9em"}}>{"VISIT OUR STORE"}</div>
                     <div className="footer-column-bar"></div>
                     <div className="title-text">{"900 University Ave."}</div>
                     <div className="title-text">{"Riverside, CA"}</div>
@@ -40,7 +39,7 @@ export default function SiteFooter()
                 </div>
 
                 <div className="footer-column">
-                    <div className="title-text" style={{textAlign: 'center'}}>{"CONNECT WITH US"}</div>
+                    <div className="title-text" style={{textAlign: 'center', fontSize: "0.9em"}}>{"CONNECT WITH US"}</div>
                     <div className="footer-column-bar"></div>
                     <div 
                         className="simple-row"

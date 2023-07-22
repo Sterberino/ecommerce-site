@@ -25,7 +25,7 @@
     "xss-clean": "^0.1.4"
   },
   "scripts": {
-    "start": "node Backend/server",
+    "start": "npm run dev",
     "dev": "(react-scripts start) | (nodemon Backend/server.js)",
     "build": "react-scripts build",
     "test": "react-scripts test",
