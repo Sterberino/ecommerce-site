@@ -12,13 +12,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 70%;
     left: 15%;
     margin-top: 50px;
 
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+    height: 100vh;
+
+    padding-bottom: 10vh;
+    padding-top: 10vh;
+
+    box-sizing: border-box;
 }
 
 /*We will use 2-column structure. Right column will just be an image*/

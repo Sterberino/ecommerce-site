@@ -1,27 +1,33 @@
 .homepage-hero{
-    width: 70%;
-    left: 15%;
+    width: 100vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
     position: relative;
-    margin-bottom: 50px;
-    margin-top: 30px;
+
+    height: 110vh;
 
     padding-bottom: 10vh;
     padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
 }
 
 .homepage-hero img{
-    width: 100%;
+    width: 80%;
     height: auto;
     position: relative;
     border-radius: 20px;
 }
 
 .homepage-hero-title{
-    position: absolute;
+    position: relative;
+    top: -25px;
     width: 33%;
-    left: calc(33% - 5px);
     height: 50px;
-    bottom: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;

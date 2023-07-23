@@ -19,13 +19,9 @@
     flex-direction: column;
     justify-content: center;
 
+    box-sizing: border-box;
     padding-top: 10vh;
     padding-bottom: 10vh;
-
-
-
-    box-sizing: border-box;
-
-    height: 90vh;
+    height: 110vh;
   }
 
