@@ -87,6 +87,11 @@
         width: 50%;
         height: 40px;
     }
+
+    .homepage-hero img{
+        width: 90%;
+    }
+
     .homepage-hero-title > .title-text:nth-child(1)
     {
         font-size: 3vw;
