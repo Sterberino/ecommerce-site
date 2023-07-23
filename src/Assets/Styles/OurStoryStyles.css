@@ -1,3 +1,12 @@
+:root {
+    --darkest-body: rgba(17,18,20, 1);
+    --darker-body: rgba(30,31,34,1);
+    --mid-body: rgba(43,45,49,1);
+    --lighter-body: rgba(49,51,56,1);
+    --lightest-body: rgba(56,58, 64, 1);
+    --main-blue: rgba(88, 101, 242, 1);
+  }
+
 .our-story{
     position: relative;
     display: flex;
@@ -38,14 +47,16 @@
     width: 80px;
     height: 30px;
     backdrop-filter: blur(5px);
-    background-color: rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.4);
+
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.25s ease;
-    filter: brightness(1);
+    filter: brightness(1);    
+    background-color: var(--main-blue);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 5px;
 }
 .read-more-button:hover{
     filter: brightness(1.2);

@@ -186,13 +186,15 @@ export default function CartPage()
         arr.push(
             <div className="cart-grid-item"  key = {j*5 + 7}  style = {{ gridColumn: '3 / span 2'}}>
                     <div  
-                        style = {{width: '200px', marginTop: '20px'}}
+                        style = {{width: '200px', marginTop: '20px', paddingTop: '8px', paddingBottom: '8px'}}
                         className="submit-button"
                         onClick = {()=> {
                             setPurchasing(true);
                         }}    
                     >
+                        <div className="title-text">
                             {"Checkout"}
+                        </div>
                     </div>
             </div>
         )

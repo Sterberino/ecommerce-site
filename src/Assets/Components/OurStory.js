@@ -11,7 +11,6 @@ export default function OurStory()
         
     return(
         <div>
-
             <div className="our-story">
                 <div className="our-story-left">
                     <div className="title-text">{"Our Story"}</div>
