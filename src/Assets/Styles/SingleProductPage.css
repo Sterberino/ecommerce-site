@@ -49,7 +49,6 @@
     max-width: 100%;
     border-radius: 5px;
     background-repeat: no-repeat;
-    color: rgba(190,190,190, 1);
     text-align: center;
     cursor: pointer;
     font-size: 0.8em;
@@ -59,7 +58,15 @@
     filter: brightness(1);    
     background-color: var(--main-blue);
     border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
+.submit-button > *{
+    margin: 0;
+    margin-bottom: 0 !important;
 }
 
 .submit-button:hover{

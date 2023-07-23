@@ -87,7 +87,9 @@ export default function SingleProductView({product}){
                         className="submit-button"
                         onClick = {()=> {postCartItem()}}    
                     >
+                        <div className="title-text">
                             {"Add to cart"}
+                        </div>
                     </div>
                 </div>
             </div>
