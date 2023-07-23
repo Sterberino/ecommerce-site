@@ -85,7 +85,6 @@
     .homepage-hero-title
     {
         width: 50%;
-        left: 25%;
         height: 40px;
     }
     .homepage-hero-title > .title-text:nth-child(1)

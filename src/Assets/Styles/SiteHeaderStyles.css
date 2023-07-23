@@ -120,6 +120,8 @@
         min-height: min-content;
         height: min-content;
 
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     .site-header > *
