@@ -95,7 +95,9 @@ export default function SingleProductView({product}){
             </div>
 
             <div style={{fontSize:"1.4em"}} className="title-text">{"You might also like"}</div>
-            <HomepageCarouselWrapper />
+            <div  style = {{position: "relative", width: "80vw", left: "10vw", right: "auto"}}>
+                <HomepageCarouselWrapper/>
+            </div>
             
         </div>
     )
