@@ -36,8 +36,7 @@ export default function useGetCart()
             }
             catch(err)
             {
-                console.log(err);
-                throw err;
+                console.log(err.message);
             }
             
         }
@@ -61,8 +60,7 @@ export default function useGetCart()
             }
             catch(err)
             {
-                console.log(err);
-                throw err;
+                console.log(err.message);
             }
         
         }
@@ -120,7 +118,7 @@ export default function useGetCart()
                     fetchData().then(res=> {
                         setCart( prev => ({cartItems: res.payload, requiresUpdate: false}))
                         setFetchingCart(false)
-                    }).catch(err => {console.log(err)})
+                    }).catch(err => {console.log(err.message)})
                 }
             }
         }
