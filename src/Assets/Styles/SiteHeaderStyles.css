@@ -5,6 +5,7 @@
     --lighter-body: rgba(49,51,56,1);
     --lightest-body: rgba(56,58, 64, 1);
     --main-blue: rgba(88, 101, 242, 1);
+    --bg-slate-10: 148, 163, 184;
 }
 
 .site-header{
@@ -18,10 +19,31 @@
     left: 0%;
     box-sizing: border-box;
 
-    background-color: var(--main-blue);
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    padding-left: 1vw;
+    padding-right: 1vw; 
+}
 
-    padding-left: 10vw;
-    padding-right: 10vw; 
+.site-header::after{
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    transform: scale(1) translateY(50%);
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: auto;
+    height: 1px;
+    background: linear-gradient(90deg,rgba(var(--bg-slate-10),0),rgba(var(--bg-slate-10),.7) 20%,rgba(var(--bg-slate-10),.7) 80%,rgba(var(--bg-slate-10),0));
+    box-shadow: rgba;
+}
+
+.icon-bar-group{
+    display: flex; 
+    flex-direction: row;
+    gap: 20px;
+    width: 240px;
 }
 
 .site-header > .title-text{
@@ -35,6 +57,7 @@
     flex-direction: row;
     width:min-content;
     align-content: center;
+    width: 240px;
 
 }
 
@@ -64,9 +87,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 100vw;
-    height: 30px;
-    
+    width: 100%;
+    height: 100%;
     left: 0;
     right: auto;
     box-sizing: border-box;
@@ -74,11 +96,6 @@
     padding-right: 10vw;
     padding-top: 30px;
     padding-bottom: 30px;
-
-    background-color: var(--darker-body);
-    border-bottom: 1px solid rgba(110, 110, 110, 1);
-    box-shadow: 0px 5px 5px var(--darkest-body);
-
 }
 
 .navigation-menu-item{
@@ -113,15 +130,15 @@
     }
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 720px) {
     .site-header{
         flex-direction: column;
         justify-content: center;
         min-height: min-content;
         height: min-content;
 
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .site-header > *
@@ -156,8 +173,23 @@
         margin-right: 10px;
     }
 
-    .site-header .cart-group > *{
-        margin-left: 35px;
-        margin-right: 35px;
+    .site-header .cart-group{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .icon-bar-group{
+        display: flex; 
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        padding-left: 35vw;
+        padding-right: 30vw;        
+    }
+
+    .navigation-menu{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 0px;
     }
 }

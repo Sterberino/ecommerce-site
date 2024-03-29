@@ -54,6 +54,7 @@ const execute = async (query) => {
     try {
         await pool.connect();     // gets connection
         await pool.query(query);  // sends queries
+        console.log(`Successfully executed pg query: ${query}`)
         return true;
     } catch (error) {
         console.error(error.stack);

@@ -5,11 +5,12 @@
   --lighter-body: rgba(49,51,56,1);
   --lightest-body: rgba(56,58, 64, 1);
   --main-blue: rgba(88, 101, 242, 1);
+  --site-body-bg: rgba(16, 23, 42, 1);
 }
 
 
 body{
-  background: var(--mid-body);
+  background: var(--site-body-bg);
 }
 
 

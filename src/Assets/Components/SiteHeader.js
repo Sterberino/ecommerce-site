@@ -9,6 +9,8 @@ import '../Styles/SiteFooterStyles.css'
 
 import {CartContext, UserContext} from "../../App";
 import useGetCart from "../Hooks/useGetCart";
+import NavigationMenu from "./NavigationMenu";
+import useWindowSize from "../Hooks/useWindowSize";
 
 export default function SiteHeader({})
 {
@@ -16,7 +18,7 @@ export default function SiteHeader({})
     const {cart, setCart} = React.useContext(CartContext);
     const navigate = useNavigate();
     const [fetchingCart, setFetchingCart] = useGetCart();
-
+    const [size] = useWindowSize();
 
     React.useEffect(()=> {
         if(cart.requiresUpdate)
@@ -24,6 +26,7 @@ export default function SiteHeader({})
             setFetchingCart(true);        
         }
     }, [cart, fetchingCart])
+    React.useEffect(() => {}, [size])
 
     const LoggedIn = ()=> {
         if(localStorage.getItem('token') 
@@ -37,57 +40,47 @@ export default function SiteHeader({})
         }
     }
 
-    return(
-        <div>
-            <div className="site-header">
-                <ProductSearchBar
-                    onSearch={(searchVal)=>{
-                        navigate('/shop', {state: {search: searchVal}})
-                        navigate(0)
-                        window.scrollTo({top: 0, left: 0, behavior: "instant"})
-                    }}
-                />
-                <div className='title-text'>Bored Ape Escape</div>
+    //Desktop Header
+    if (size > 720)
+    {
+        return(
+            <header className="site-header">
+                <div className="icon-bar-group">
+                    <img src={`${process.env.PUBLIC_URL}Images/icon.png`}style={{width:"40px",height:"40px"}}/>
+                    <ProductSearchBar
+                        onSearch={(searchVal)=>{
+                            navigate('/shop', {state: {search: searchVal}})
+                            navigate(0)
+                            window.scrollTo({top: 0, left: 0, behavior: "instant"})
+                        }}
+                    />
+                </div>
+                            
+                <NavigationMenu />
                 <div className="cart-group">
                     <div className="title-text" onClick={()=>{navigate('/login')}}>{LoggedIn() ? "Sign Out" : "Sign In"}</div>
                     <ProductCart/>
                 </div>
-            </div>
-            
-            <div className="navigation-menu">
-                <div className="navigation-menu-item">
-                    <div 
-                        className="title-text"
-                        onClick = {()=> {navigate('/')}}    
-                    >
-                    {"Home"}</div>
+            </header>
+        )    
+    }
+    //Mobile Header
+    else {
+        return(
+            <header className="site-header">
+                <div className="icon-bar-group">
+                    <img src={`${process.env.PUBLIC_URL}Images/icon.png`}style={{width:"40px",height:"40px"}}/>
+                    <div className="cart-group">
+                        <div className="title-text" onClick={()=>{navigate('/login')}}>{LoggedIn() ? "Sign Out" : "Sign In"}</div>
+                        <ProductCart/>
+                    </div>       
                 </div>
-                <div className="navigation-menu-item">
-                    <div 
-                        className="title-text"
-                        onClick = {()=> {
-                            navigate('/shop')
-                            window.scrollTo({top: 0, left: 0, behavior: "instant"})
-                        }}
-                    >{"Shop"}</div>
-                </div>
-                {/* <div className="navigation-menu-item">
-                    <div className="title-text">{"News & Events"}</div>
-                </div>*/}
-                <div 
-                    className="navigation-menu-item"
-                    onClick = {()=> {navigate('/about')}}
-                >
-                    <div className="title-text">{"About"}</div>
-                </div>
-                <div className="navigation-menu-item">
-                    <div 
-                        className="title-text"
-                        onClick = {()=> {navigate('/contact')}}
-                    >{"Contact"}</div>
-                </div>
-            </div>
-     
-        </div>
-    )
+                     
+                
+                <NavigationMenu />
+                
+            </header>
+        )    
+    }
+    
 }
