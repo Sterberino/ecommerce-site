@@ -28,7 +28,7 @@ export default function HomepageHero({imageUrl, title, navigationState})
 
             <div className="background-grid"></div>
             <div className="blob"></div>
-            <div className="blob" style={{translate: "-100% 30%",borderRadius: "100% 75% 92% 74% / 60% 80% 30% 70%"}}></div>
+            <div className="blob" style={{translate: "-130% 30%",borderRadius: "100% 75% 92% 74% / 60% 80% 30% 70%"}}></div>
         </div>
     )
 

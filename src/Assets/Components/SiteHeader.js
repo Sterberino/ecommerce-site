@@ -11,6 +11,7 @@ import {CartContext, UserContext} from "../../App";
 import useGetCart from "../Hooks/useGetCart";
 import NavigationMenu from "./NavigationMenu";
 import useWindowSize from "../Hooks/useWindowSize";
+import Icon from "./Icon";
 
 export default function SiteHeader({})
 {
@@ -46,7 +47,10 @@ export default function SiteHeader({})
         return(
             <header className="site-header">
                 <div className="icon-bar-group">
-                    <img src={`${process.env.PUBLIC_URL}Images/icon.png`}style={{width:"40px",height:"40px"}}/>
+                    <Icon
+                        maskUrl={`${process.env.PUBLIC_URL}Images/icon.png`}
+                        style={{width:"40px",height:"40px"}} 
+                    />
                     <ProductSearchBar
                         onSearch={(searchVal)=>{
                             navigate('/shop', {state: {search: searchVal}})
@@ -69,7 +73,10 @@ export default function SiteHeader({})
         return(
             <header className="site-header">
                 <div className="icon-bar-group">
-                    <img src={`${process.env.PUBLIC_URL}Images/icon.png`}style={{width:"40px",height:"40px"}}/>
+                    <Icon
+                        maskUrl={`${process.env.PUBLIC_URL}Images/icon.png`}
+                        style={{width:"40px",height:"40px"}} 
+                    />
                     <div className="cart-group">
                         <div className="title-text" onClick={()=>{navigate('/login')}}>{LoggedIn() ? "Sign Out" : "Sign In"}</div>
                         <ProductCart/>

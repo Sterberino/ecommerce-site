@@ -1,0 +1,44 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+:root{
+    --slate-400: rgba(34, 211, 238,1);
+    --slate-200: rgba(207, 250, 254,1);
+}
+
+.icon-button{
+    position: relative;
+    z-index: 2;
+
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    filter: blur(10px);
+    background-image: linear-gradient(
+        47deg,
+        rgba(255, 88, 139, 1) 21%,
+        rgb(0 164 173) 67%,
+        rgba(118, 74, 166, 1) 81%
+      );
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+
+    -webkit-transition: all 0.25s ease;
+
+    -o-transition: all 0.25s ease;
+
+    transition: all 0.25s ease;
+    -webkit-filter:brightness(1);
+            filter:brightness(1);
+}
