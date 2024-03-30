@@ -1,12 +1,4 @@
-:root {
-    --darkest-body: rgba(17,18,20, 1);
-    --darker-body: rgba(30,31,34,1);
-    --mid-body: rgba(43,45,49,1);
-    --lighter-body: rgba(49,51,56,1);
-    --lightest-body: rgba(56,58, 64, 1);
-    --main-blue: rgba(88, 101, 242, 1);
-  }
-
+@import "Constants.css";
 
 .purchase-button{
     position: absolute;
@@ -14,18 +6,15 @@
     width: 100%;
     right: 0px;
     left: 0px;
-    background-color: var(--main-blue);
+    background-image: var(--pretty-gradient);
     bottom: -55px;
 
+    border-top: 1px solid rgba(var(--bg-slate-10));
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: start;
     
-    box-shadow: 
-        inset 0px 5px 5px rgba(255, 255, 255, 0.25 ),
-        inset 0px -5px 10px rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(8,89,10,1);
     transition: all 0.25s ease;
 
     z-index: 2;

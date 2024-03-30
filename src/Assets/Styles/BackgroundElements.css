@@ -20,7 +20,6 @@
     width: 400px;
     aspect-ratio: 1/1;
     filter: blur(50px);
-    z-index: -1;
     background: linear-gradient(
       47deg,
       rgba(207, 250, 254, 0.2) 21%,

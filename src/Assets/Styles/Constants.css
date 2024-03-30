@@ -1,0 +1,27 @@
+:root{
+    --darkest-body: rgba(5,11,31, 1);
+    --darker-body: rgba(10, 16, 36, 1);
+    --mid-body: rgba(43,45,49,1);
+    --lighter-body: rgba(49,51,56,1);
+    --lightest-body: rgba(56,58, 64, 1);
+    --main-blue: rgba(88, 101, 242, 1);
+    --bg-slate-10: 138, 153, 174;
+    --site-body-bg: rgba(16, 23, 42, 1);
+
+    --pretty-gradient: linear-gradient(
+        47deg,
+        rgba(236, 72, 153, 0.7) 21%, /*bg-pink-500*/
+        rgb(6, 182, 212,0.7) 67%, /*bg-cyan-500*/
+        rgba(168, 85, 247, 0.7) 81% /*bg-purple-500*/
+      );
+
+    --pretty-gradient-dark-pink: rgba(131, 24, 67, 0.25); /*bg-pink-500*/
+    --pretty-gradient-dark-cyan: rgba(22, 78, 99, 0.4);/*bg-cyan-900*/
+    --pretty-gradient-dark-purple: rgba(88, 28, 135, 0.25);/*bg-purple-500*/
+    --pretty-gradient-dark: linear-gradient(
+        47deg,
+        var(--pretty-gradient-dark-pink) 21%,
+        var(--pretty-gradient-dark-cyan) 47%, 
+        var(--pretty-gradient-dark-purple) 81% 
+      );
+}

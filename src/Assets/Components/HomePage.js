@@ -12,6 +12,7 @@ import Spinner from "./Spinner";
 import BlackMirrorSpinner from "./BlackMirrorSpinner";
 import HomepageCarouselWrapper from "./HomepageCarouselWrapper";
 import '../Styles/BackgroundBlock.css';
+import '../Styles/BackgroundElements.css';
 
 export default function Homepage()
 {
@@ -48,7 +49,7 @@ export default function Homepage()
                         fontSize : '1.3em'
                     }}
                 >{"Most Popular"}</div>
-                <HomepageCarouselWrapper params={{sort: 'numpurchases', sortMode: 'DESC', limit: '10'}}/>
+                <HomepageCarouselWrapper params={{ sort: 'numpurchases', sortMode: 'DESC', limit: '10' }} />
             </div>
 
             <OurStory />

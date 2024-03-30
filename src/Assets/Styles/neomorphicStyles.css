@@ -1,3 +1,5 @@
+@import "Constants.css";
+
 :root {
     --main-dark: #25272a;
     --neu-dark: #090a0c;
@@ -187,7 +189,12 @@
     left: 0%;
     padding: 10px;
     
-    background: linear-gradient(160.55deg, #353A40 -3.02%, #121416 93.08%);
+   background-image:linear-gradient(
+        30deg,
+        var(--pretty-gradient-dark-pink) 21%,
+        var(--pretty-gradient-dark-cyan) 47%, 
+        var(--pretty-gradient-dark-purple) 81% 
+      );
     box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
     border-radius: 24px;
    
@@ -218,7 +225,6 @@
 
 /*Wrapper for image for fitting to card*/
 .image-display::before{
-    background: var(--header-button-wrapper-gradient);
     box-shadow: var(--controls-button-wrapper-neu-shadows);
 
     box-sizing: border-box;

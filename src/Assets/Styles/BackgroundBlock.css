@@ -1,11 +1,4 @@
-:root {
-    --darkest-body: rgba(17,18,20, 1);
-    --darker-body: rgba(30,31,34,1);
-    --mid-body: rgba(43,45,49,1);
-    --lighter-body: rgba(49,51,56,1);
-    --lightest-body: rgba(56,58, 64, 1);
-    --main-blue: rgba(88, 101, 242, 1);
-  }
+@import "Constants.css";
 
   
   .background-block{
@@ -13,12 +6,12 @@
     padding-left: 10vw;
     padding-right: 10vw;
     box-sizing: border-box;
-
-    background-color: var(--lighter-body);
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    overflow: hidden;
+    background-image: var(--pretty-gradient-dark);
     box-sizing: border-box;
     padding-top: 10vh;
     padding-bottom: 10vh;

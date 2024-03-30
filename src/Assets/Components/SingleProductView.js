@@ -8,6 +8,7 @@ import { ProductsContext } from "../../App";
 
 import usePostCart from "../Hooks/usePostCart";
 import HomepageCarouselWrapper from "./HomepageCarouselWrapper";
+import "../Styles/BackgroundElements.css";
 
 export default function SingleProductView({product}){
     const {products, setProducts} = React.useContext(ProductsContext)
@@ -91,6 +92,8 @@ export default function SingleProductView({product}){
                             {"Add to cart"}
                         </div>
                     </div>
+                    <div className="blob" style={{ translate: "50% -30%" }}></div>
+                    <div className="blob" style={{translate: "-140% 30%",borderRadius: "100% 75% 92% 74% / 60% 80% 30% 70%"}}></div>
                 </div>
             </div>
 
@@ -98,7 +101,6 @@ export default function SingleProductView({product}){
             <div  style = {{position: "relative", width: "80vw", left: "10vw", right: "auto"}}>
                 <HomepageCarouselWrapper/>
             </div>
-            
         </div>
     )
 }

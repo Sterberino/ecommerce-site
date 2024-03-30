@@ -26,6 +26,8 @@ export default function AboutPage()
                     +   "high quality NFTs at a price that everyone can afford."
                     }
                 </div>
+                <div className="blob" style={{ translate: "-140% -40%" }}></div>
+                <div className="blob" style={{translate: "140% 35%",borderRadius: "100% 75% 92% 74% / 60% 80% 30% 70%"}}></div>
             </div>
             <SiteFooter />
         </div>
