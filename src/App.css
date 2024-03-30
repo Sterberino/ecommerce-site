@@ -11,6 +11,10 @@
 
 body{
   background: var(--site-body-bg);
+}
+
+html, body {
+  position:relative;
   overflow-x:hidden;
 }
 
