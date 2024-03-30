@@ -18,5 +18,6 @@
     height: 110vh;
 
     overflow-x: hidden;
+    max-width: 100vw;
   }
 

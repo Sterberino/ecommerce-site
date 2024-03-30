@@ -20,7 +20,6 @@ export default function Homepage()
     return(
         <div>
             <SiteHeader />
-
             <HomepageHero 
                 imageUrl = {`${process.env.PUBLIC_URL}/Images/Monke.png`}
                 title={"Brand New Brands"}
