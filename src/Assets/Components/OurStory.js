@@ -10,8 +10,7 @@ export default function OurStory()
     const navigate = useNavigate();
         
     return(
-        <div>
-            <div className="our-story">
+            <section className="our-story">
                 <div className="our-story-left">
                     <div className="title-text">{"Our Story"}</div>
                     <div className="basic-text">
@@ -39,8 +38,7 @@ export default function OurStory()
                 </div>
 
                 <img src = {`${process.env.PUBLIC_URL}/Images/OurStory.png`}></img>
-            </div>
-        </div>
+            </section>
     
     )
 }

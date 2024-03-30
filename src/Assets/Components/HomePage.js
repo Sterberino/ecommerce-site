@@ -42,7 +42,7 @@ export default function Homepage()
                 navigationState = {{sort: 'numpurchases', sortMode: 'DESC'}}
             />
 
-            <div className="background-block">
+            <section className="background-block">
                 <div 
                     className="title-text"
                     style = {{
@@ -50,7 +50,7 @@ export default function Homepage()
                     }}
                 >{"Most Popular"}</div>
                 <HomepageCarouselWrapper params={{ sort: 'numpurchases', sortMode: 'DESC', limit: '10' }} />
-            </div>
+            </section>
 
             <OurStory />
             <SiteFooter />

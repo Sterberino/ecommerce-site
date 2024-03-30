@@ -10,7 +10,7 @@ export default function HomepageHero({imageUrl, title, navigationState})
     const navigate = useNavigate();
 
     return(
-        <div className="homepage-hero">
+        <section className="homepage-hero">
             <img src={imageUrl}/>
             <div className="homepage-hero-title">
                 <div className="title-text">
@@ -29,7 +29,7 @@ export default function HomepageHero({imageUrl, title, navigationState})
             <div className="background-grid"></div>
             <div className="blob"></div>
             <div className="blob" style={{translate: "-130% 30%",borderRadius: "100% 75% 92% 74% / 60% 80% 30% 70%"}}></div>
-        </div>
+        </section>
     )
 
 }
