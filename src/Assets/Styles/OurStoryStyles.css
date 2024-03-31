@@ -64,6 +64,7 @@
 .read-more-button > *{
     position: absolute;
     top: 25%;
+    left: 0%;
     text-align: center;
     width: 100%;
     margin: 0;

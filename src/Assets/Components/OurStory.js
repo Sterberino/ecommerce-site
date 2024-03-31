@@ -29,12 +29,12 @@ export default function OurStory()
                         }
                     </div>
             
-                    <div 
+                    <button 
                         className="read-more-button"
                         onClick = {()=> {navigate('/about')}}
                     >
                         <div className="title-text">{"Read More"}</div>
-                    </div>
+                    </button>
                 </div>
 
                 <img src = {`${process.env.PUBLIC_URL}/Images/OurStory.png`}></img>
