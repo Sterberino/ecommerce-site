@@ -5,7 +5,7 @@ export default function HomepageCardsWrapperAlt()
     return (
         <div className="cards-wrapper-alt">
             <HomepageCard
-                imageUrl={'Homepage-Bored-Ape-2.jpg'}
+                imageUrl={'Homepage-Bored-Ape-3.jpg'}
                 style={{ transform: 'translate(-60px, 80px)' }}
                 title={"Bored Ape Megaluxe"}
             />
@@ -15,7 +15,7 @@ export default function HomepageCardsWrapperAlt()
                 title={"Bored Ape Especial"}
             />
             <HomepageCard
-                imageUrl={'Homepage-Bored-Ape-3.jpg'}
+                imageUrl={'Homepage-Bored-Ape-2.jpg'}
                 style={{ transform: 'translate(0px, 20px)' }}
                 title={"Bored Ape Ultraluxe"}
             />
