@@ -13,6 +13,7 @@ import BlackMirrorSpinner from "./BlackMirrorSpinner";
 import HomepageCarouselWrapper from "./HomepageCarouselWrapper";
 import '../Styles/BackgroundBlock.css';
 import '../Styles/BackgroundElements.css';
+import HomepageMidsection from "./HomepageMidsection";
 
 export default function Homepage()
 {
@@ -21,8 +22,6 @@ export default function Homepage()
         <div>
             <SiteHeader />
             <HomepageHero 
-                imageUrl = {`${process.env.PUBLIC_URL}/Images/Monke.png`}
-                title={"Brand New Brands"}
                 navigationState = {{sort: 'createdat', sortMode: 'DESC'}}
             />
             <div className="background-block">
@@ -35,9 +34,7 @@ export default function Homepage()
                 <HomepageCarouselWrapper params={{sort: 'createdat', sortMode: 'DESC', limit: '10'}}/>
             </div>
 
-            <HomepageHero 
-                imageUrl = {`${process.env.PUBLIC_URL}/Images/Monke2.png`}
-                title={"Best Sellers"}
+            <HomepageMidsection 
                 navigationState = {{sort: 'numpurchases', sortMode: 'DESC'}}
             />
 
